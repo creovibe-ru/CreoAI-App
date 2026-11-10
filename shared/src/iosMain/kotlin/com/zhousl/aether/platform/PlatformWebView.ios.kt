@@ -42,7 +42,7 @@ actual fun PlatformWebView(
                     )
                     addUserScript(
                         WKUserScript(
-                            source = "window.Creo={postMessage:function(message){window.webkit.messageHandlers.Creo.postMessage(message);}};",
+                            source = "window.Creo={postMessage:function(message){window.webkit.messageHandlers.Creo.postMessage(message);}};window.Aether=window.Creo;",
                             injectionTime =
                                 WKUserScriptInjectionTime.WKUserScriptInjectionTimeAtDocumentStart,
                             forMainFrameOnly = false,

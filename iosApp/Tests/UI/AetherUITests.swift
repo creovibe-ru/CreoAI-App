@@ -317,7 +317,7 @@ final class AetherUITests: XCTestCase {
             privacyAgreement.tap()
         }
         XCTAssertTrue(app.buttons["Get started"].waitForExistence(timeout: 20))
-        XCTAssertTrue(app.staticTexts["Welcome to Creo"].exists)
+        XCTAssertTrue(app.staticTexts["Welcome to Creo AI"].exists)
         app.buttons["Get started"].tap()
 
         XCTAssertTrue(app.staticTexts["Set up the built-in Alpine Linux environment. It stays inside Creo's private app storage."].waitForExistence(timeout: 20))

@@ -336,7 +336,7 @@ For unrestricted HTML micro-UIs, use a WebView node:
 ui.web({
   height: 320,
   html: `
-    <button onclick='Aether.postMessage(JSON.stringify({
+    <button onclick='Creo.postMessage(JSON.stringify({
       action: "clicked",
       args: { source: "web" }
     }))'>Run</button>
@@ -345,7 +345,9 @@ ui.web({
 ```
 
 JavaScript, DOM storage, network access, file access, and content access are
-enabled. `Aether.postMessage(string)` invokes a registered extension action.
+enabled. `Creo.postMessage(string)` invokes a registered extension action.
+`Aether.postMessage(string)` remains available as a compatibility alias for
+extensions written before the Creo rebrand.
 
 ## Settings pages
 

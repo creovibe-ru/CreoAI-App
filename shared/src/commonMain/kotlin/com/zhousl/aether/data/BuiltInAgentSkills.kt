@@ -36,9 +36,9 @@ val BuiltInAgentSkills: List<BuiltInAgentSkill> = listOf(
             Read the sections relevant to the requested feature before implementing it:
 
             - Documentation site: https://aether.baimoqilin.com/docs/extensions/overview.md
-            - Complete Markdown reference: https://github.com/Zhou-Shilin/Creo/blob/main/docs/AETHER_EXTENSIONS.md
-            - Extension API declarations and examples: https://github.com/Zhou-Shilin/Creo/tree/main/packages/extension-api
-            - Combined Pi and Creo example: https://github.com/Zhou-Shilin/Creo/tree/main/examples/aether-extension
+            - Complete Markdown reference: https://github.com/creovibe-ru/CreoAI-App/blob/main/docs/AETHER_EXTENSIONS.md
+            - Extension API declarations and examples: https://github.com/creovibe-ru/CreoAI-App/tree/main/packages/extension-api
+            - Combined Pi and Creo example: https://github.com/creovibe-ru/CreoAI-App/tree/main/examples/aether-extension
 
             When the current workspace is an Creo source checkout, prefer its local `docs/AETHER_EXTENSIONS.md`, `packages/extension-api/src/index.ts`, and `examples/aether-extension/` files because they match the running source version.
 

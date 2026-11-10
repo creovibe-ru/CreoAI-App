@@ -16,14 +16,22 @@ class ProviderConfigFormTest {
     @Test
     fun catalogIncludesEveryPiBuiltInProviderAndCustomEndpoint() {
         assertEquals(35, PiProviderCatalog.builtInProviders.size)
-        assertEquals(36, PiProviderCatalog.providers.size)
+        assertEquals(37, PiProviderCatalog.providers.size)
 
         val customProviders = PiProviderCatalog.providers.filterNot { it.isBuiltIn }
-        assertEquals(1, customProviders.size)
-        assertEquals("openai-compatible", customProviders.single().id)
+        assertEquals(2, customProviders.size)
         assertEquals(
-            listOf("openai", "openai-compatible"),
-            PiProviderCatalog.providers.take(2).map { it.id },
+            listOf("creovibe", "openai-compatible"),
+            customProviders.map { it.id },
+        )
+
+        val creovibe = PiProviderCatalog.resolve("creovibe")
+        assertEquals("https://app.creovibe.ru/v1", creovibe.defaultBaseUrl)
+        assertEquals("Recommended", creovibe.category)
+
+        assertEquals(
+            listOf("creovibe", "openai", "openai-compatible"),
+            PiProviderCatalog.providers.take(3).map { it.id },
         )
     }
 

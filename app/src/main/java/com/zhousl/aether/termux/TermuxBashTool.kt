@@ -1469,7 +1469,7 @@ internal object TermuxContract {
     const val ResultExitCodeExtra = "exitCode"
     const val ResultErrExtra = "err"
     const val ResultErrmsgExtra = "errmsg"
-    const val ExecutionIdExtra = "com.baimoqilin.aether.termux.EXECUTION_ID"
+    const val ExecutionIdExtra = "com.creoai.app.termux.EXECUTION_ID"
     const val PrefixDirectory = "/data/data/com.termux/files/usr"
     const val BashPath = "$PrefixDirectory/bin/bash"
     const val HomeDirectory = "/data/data/com.termux/files/home"

@@ -30,6 +30,12 @@ actual fun PlatformWebView(
                     AetherWebMessageBridge { message -> currentOnMessage(message) },
                     "Creo",
                 )
+                // Back-compat alias: extensions written against the documented
+                // `Aether.postMessage(...)` contract keep working after the rebrand.
+                addJavascriptInterface(
+                    AetherWebMessageBridge { message -> currentOnMessage(message) },
+                    "Aether",
+                )
             }
         },
         update = { view ->
