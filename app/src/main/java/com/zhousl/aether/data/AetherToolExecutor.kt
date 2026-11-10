@@ -14,7 +14,7 @@ data class AetherToolExecutionResult(
 }
 
 /**
- * Adapter for Aether-owned host capabilities only. Pi Coding Agent owns all
+ * Adapter for Creo-owned host capabilities only. Pi Coding Agent owns all
  * filesystem, shell, search, Skill, Extension, and image-reading mechanics.
  */
 class AetherToolExecutor(
@@ -64,7 +64,7 @@ class AetherToolExecutor(
 
             else -> JSONObject()
                 .put("ok", false)
-                .put("error", "Unknown Aether host tool '$toolName'.")
+                .put("error", "Unknown Creo host tool '$toolName'.")
                 .toString()
         }
         return AetherToolExecutionResult(toolName, argumentsJson, rawOutput)
@@ -227,7 +227,7 @@ private fun agentModeToolDefinition(): JSONObject = JSONObject().apply {
             "Default observations and action results are element trees. Prefer node_id for tap/click, long_click, text, and scroll. " +
             "observe/start and action results follow the configured input strategy. Use tree/screenshot or input_strategy to request an alternative only when strategy switching is allowed. Unrelated content events do not expire IDs: the target is refreshed and checked at execution. Target errors include a fresh observation when permitted. Use visible, enabled, actionable elements; never guess a replacement by index. " +
             "Coordinate tap/swipe is available as a fallback, normalized 0..1000 on each axis. " +
-            "When finished, stop with return_to_aether=true can bring the user back to Aether (foreground mode only). Omit it to leave the result visible in the controlled app. " +
+            "When finished, stop with return_to_aether=true can bring the user back to Creo (foreground mode only). Omit it to leave the result visible in the controlled app. " +
             "Use only when Phone Use is selected in the composer; foreground actions change the screen visible to the user.",
     )
     put(
@@ -238,7 +238,7 @@ private fun agentModeToolDefinition(): JSONObject = JSONObject().apply {
                 "properties",
                 JSONObject().apply {
                     put("action", stringProperty("One of: list_apps, start, observe, tree, status, launch, tap, click, long_click, scroll, swipe, key, text, screenshot, stop."))
-                    put("return_to_aether", booleanProperty("For stop, foreground mode only: optionally return the user to Aether after finishing. Defaults to false; omit to leave the controlled app visible."))
+                    put("return_to_aether", booleanProperty("For stop, foreground mode only: optionally return the user to Creo after finishing. Defaults to false; omit to leave the controlled app visible."))
                     put("input_strategy", stringProperty("Optional observation override for this action: element_tree_first or screenshot_first. Requires alternative strategy switching to be allowed."))
                     put("output_strategy", stringProperty("Optional output strategy for this action: element_first or gesture_first. node_id selects elements; coordinates select gestures. Requires switching permission for alternatives."))
                     put("node_id", stringProperty("Element ID from the latest tree. Required for scroll; preferred for tap, click, long_click, and text."))

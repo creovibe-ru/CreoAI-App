@@ -11,11 +11,11 @@ import okhttp3.Request
 import org.json.JSONObject
 
 private const val GithubLatestReleaseUrl =
-    "https://api.github.com/repos/Zhou-Shilin/Aether/releases/latest"
+    "https://api.github.com/repos/creovibe-ru/CreoAI-App/releases/latest"
 private const val GithubLatestNightlyRunUrl =
-    "https://api.github.com/repos/Zhou-Shilin/Aether/actions/workflows/build-nightly-apk.yml/runs?branch=main&status=success&per_page=1"
+    "https://api.github.com/repos/creovibe-ru/CreoAI-App/actions/workflows/build-nightly-apk.yml/runs?branch=main&status=success&per_page=1"
 private const val NightlyArtifactDownloadUrl =
-    "https://nightly.link/Zhou-Shilin/Aether/workflows/build-nightly-apk.yml/main/Aether-nightly.zip"
+    "https://nightly.link/creovibe-ru/CreoAI-App/workflows/build-nightly-apk.yml/main/CreoAI-nightly.zip"
 private const val ApkMimeType = "application/vnd.android.package-archive"
 private const val ZipMimeType = "application/zip"
 
@@ -37,7 +37,7 @@ class AppUpdateManager(
             .url(GithubLatestReleaseUrl)
             .header("Accept", "application/vnd.github+json")
             .header("X-GitHub-Api-Version", "2022-11-28")
-            .header("User-Agent", "Aether-Android")
+            .header("User-Agent", "CreoAI-Android")
             .build()
 
         client.newCall(request).execute().use { response ->
@@ -74,7 +74,7 @@ class AppUpdateManager(
                 tagName = tagName.ifBlank { versionName },
                 releaseUrl = releaseJson.optString("html_url").trim(),
                 apkFileName = apkAsset.optString("name").trim().ifBlank {
-                    "Aether-$versionName.apk"
+                    "Creo-$versionName.apk"
                 },
                 apkDownloadUrl = apkAsset.optString("browser_download_url").trim().ifBlank {
                     error("APK asset did not include a download URL.")
@@ -88,7 +88,7 @@ class AppUpdateManager(
             .url(GithubLatestNightlyRunUrl)
             .header("Accept", "application/vnd.github+json")
             .header("X-GitHub-Api-Version", "2022-11-28")
-            .header("User-Agent", "Aether-Android")
+            .header("User-Agent", "CreoAI-Android")
             .build()
 
         client.newCall(request).execute().use { response ->
@@ -109,7 +109,7 @@ class AppUpdateManager(
                 versionName = "Nightly $shortSha",
                 tagName = shortSha,
                 releaseUrl = run.optString("html_url").trim(),
-                apkFileName = "Aether-nightly-$shortSha.apk",
+                apkFileName = "CreoAI-nightly-$shortSha.apk",
                 apkDownloadUrl = NightlyArtifactDownloadUrl,
                 isZipArchive = true,
             )
@@ -123,7 +123,7 @@ class AppUpdateManager(
         val request = Request.Builder()
             .url(release.apkDownloadUrl)
             .header("Accept", if (release.isZipArchive) ZipMimeType else ApkMimeType)
-            .header("User-Agent", "Aether-Android")
+            .header("User-Agent", "CreoAI-Android")
             .build()
 
         val updatesDirectory = File(context.cacheDir, "updates").apply { mkdirs() }
@@ -234,7 +234,7 @@ private fun String.numericVersionParts(): List<Int> =
 
 private fun String.sanitizeFileName(): String =
     replace(Regex("[^A-Za-z0-9._-]+"), "_")
-        .ifBlank { "Aether-update.apk" }
+        .ifBlank { "CreoAI-update.apk" }
         .let { value ->
             if (value.lowercase(Locale.US).endsWith(".apk")) value else "$value.apk"
         }

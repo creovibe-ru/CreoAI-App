@@ -1,4 +1,4 @@
-// Lightweight handoff between the Pi extension (index.ts) and the Aether
+// Lightweight handoff between the Pi extension (index.ts) and the Creo
 // Script Mod (aether.ts). Keep this module free of pi/MCP SDK imports so the
 // two loaders can share it without pulling each other's dependency graphs.
 
@@ -82,7 +82,7 @@ export function unregisterMcpAetherBridge(bridge: McpAetherBridge): void {
   delete (globalThis as Record<PropertyKey, unknown>)[BRIDGE_KEY];
 }
 
-/** Attach the Aether API half of the handoff when the Script Mod loads. */
+/** Attach the Creo API half of the handoff when the Script Mod loads. */
 export function attachMcpAetherApi(
   api: McpAetherBridgeApi,
   onBridge?: (bridge: McpAetherBridge) => void,

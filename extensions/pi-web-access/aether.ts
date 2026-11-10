@@ -889,7 +889,7 @@ const toolsSection: AetherSettingsSection = {
 	settings: [webSearchEnabledBinding.setting],
 };
 
-/** Fallback layout for Aether builds that do not render page-level sections yet. */
+/** Fallback layout for Creo builds that do not render page-level sections yet. */
 const generalCategory: AetherSettingsCategory = {
 	id: "general",
 	title: "Web search tools",
@@ -1153,7 +1153,7 @@ export const activateAether = async (aether: AetherExtensionAPI) => {
 		try {
 			aether.registerSettings(definition);
 		} catch {
-			// Older Aether builds only accept sections OR categories. Fall back
+			// Older Creo builds only accept sections OR categories. Fall back
 			// to the master toggle as its own top-level category.
 			aether.registerSettings({
 				...definition,

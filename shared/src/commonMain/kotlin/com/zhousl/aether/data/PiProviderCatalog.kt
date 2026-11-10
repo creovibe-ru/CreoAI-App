@@ -44,8 +44,19 @@ const val DefaultPiProviderId = "openai-compatible"
 const val DefaultCustomProviderBaseUrl = "https://api.openai.com/v1"
 const val DefaultCustomModelId = "gpt-5.4"
 
+// CreoVibe backend (app.creovibe.ru): OpenAI-compatible API, Selora-parity.
+const val CreoApiBaseUrl = "https://app.creovibe.ru/v1"
+const val CreoApiDefaultModelId = "claude-sonnet-5-5"
+
 object PiProviderCatalog {
     val providers: List<PiProviderDefinition> = listOf(
+        custom(
+            "creovibe",
+            "CreoVibe",
+            defaultBaseUrl = CreoApiBaseUrl,
+            defaultModelId = CreoApiDefaultModelId,
+            category = "Recommended",
+        ),
         builtin(
             "openai",
             "OpenAI",
@@ -169,15 +180,18 @@ private fun builtin(
 private fun custom(
     id: String,
     displayName: String,
+    defaultBaseUrl: String = DefaultCustomProviderBaseUrl,
+    defaultModelId: String = DefaultCustomModelId,
+    category: String = "Custom",
 ): PiProviderDefinition = PiProviderDefinition(
     id = id,
     displayName = displayName,
-    defaultBaseUrl = DefaultCustomProviderBaseUrl,
-    defaultModelId = DefaultCustomModelId,
+    defaultBaseUrl = defaultBaseUrl,
+    defaultModelId = defaultModelId,
     supportsApiKey = true,
     requiresBaseUrl = true,
     isBuiltIn = false,
-    category = "Custom",
+    category = category,
 )
 
 private fun hostOf(baseUrl: String): String {

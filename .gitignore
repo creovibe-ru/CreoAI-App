@@ -4,6 +4,7 @@ build/
 **/build/
 **/.cxx/
 **/node_modules/
+.kotlin/
 
 # Local Android/IDE state
 local.properties

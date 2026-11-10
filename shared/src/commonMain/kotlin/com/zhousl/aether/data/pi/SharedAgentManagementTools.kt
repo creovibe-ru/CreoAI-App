@@ -25,7 +25,7 @@ import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
-/** Aether-owned host tools shared by Android and iOS. */
+/** Creo-owned host tools shared by Android and iOS. */
 class SharedAgentManagementTools(
     private val runtime: MultiplatformLocalRuntime,
     private val bridge: SharedPiBridgeClient,
@@ -54,7 +54,7 @@ class SharedAgentManagementTools(
             "aether_skill_manage" -> manageSkills(arguments)
             "aether_extension_manage" -> manageExtensions(arguments)
             "aether_developer_manage" -> manageDeveloper(arguments)
-            else -> error("Unsupported Aether host tool: $name")
+            else -> error("Unsupported Creo host tool: $name")
         }
     } catch (cancellationException: CancellationException) {
         throw cancellationException
@@ -71,7 +71,7 @@ class SharedAgentManagementTools(
             setOf("general", "reliability", "agent_skills", "developer")
         }
         val current = settings()
-        return agentToolSuccess("Read ${categories.size} Aether configuration categories.") {
+        return agentToolSuccess("Read ${categories.size} Creo configuration categories.") {
             categories.forEach { category ->
                 when (category) {
                     "general" -> put("general", buildJsonObject {
@@ -127,7 +127,7 @@ class SharedAgentManagementTools(
             else -> error("Unsupported settings category '$category'.")
         }
         updateSettings(updated)
-        return agentToolSuccess("Updated Aether $category settings.") { put("category", category) }
+        return agentToolSuccess("Updated Creo $category settings.") { put("category", category) }
     }
 
     private suspend fun setExtensionConfiguration(patch: JsonObject): SharedHostToolResult {
@@ -221,9 +221,9 @@ class SharedAgentManagementTools(
                 require(command.isNotBlank()) { "command is required for invoke_command." }
                 bridge.invokeExtensionCommand(sessionId, command, arguments.string("args"))
             }
-            else -> error("Unsupported Aether extension action '$action'.")
+            else -> error("Unsupported Creo extension action '$action'.")
         }
-        return agentToolSuccess("Completed Aether extension action '$action'.") {
+        return agentToolSuccess("Completed Creo extension action '$action'.") {
             response.forEach { (key, value) -> put(key, value) }
         }
     }
@@ -238,7 +238,7 @@ class SharedAgentManagementTools(
             "Unsupported developer action."
         }
         val ping = bridge.ping()
-        return agentToolSuccess("Read Aether runtime diagnostics.") {
+        return agentToolSuccess("Read Creo runtime diagnostics.") {
             put("runtime", ping)
             put("runtime_home", runtime.homeDirectory)
             put("workspace", runtime.workspaceRoot)
@@ -251,13 +251,13 @@ class SharedAgentManagementTools(
 private fun kotlinx.serialization.json.JsonArrayBuilder.addSelfManagementDefinitions() {
     add(agentToolDefinition(
         "aether_config_get",
-        "Read Aether general, reliability, Agent Skills, native extension Settings Pages, and developer configuration.",
+        "Read Creo general, reliability, Agent Skills, native extension Settings Pages, and developer configuration.",
         "parallel",
         properties = mapOf("categories" to agentStringArraySchema("Optional categories to read.")),
     ))
     add(agentToolDefinition(
         "aether_config_set",
-        "Modify allowed Aether general, reliability, or native extension settings. For extensions, pass extension_id, settings_id, and a values object inside settings.",
+        "Modify allowed Creo general, reliability, or native extension settings. For extensions, pass extension_id, settings_id, and a values object inside settings.",
         "sequential",
         listOf("category", "settings"),
         mapOf(
@@ -270,7 +270,7 @@ private fun kotlinx.serialization.json.JsonArrayBuilder.addSelfManagementDefinit
     ))
     add(agentToolDefinition(
         "aether_skill_manage",
-        "List, remotely install, enable, disable, or remove Aether Agent Skills.",
+        "List, remotely install, enable, disable, or remove Creo Agent Skills.",
         "sequential",
         listOf("action"),
         mapOf(
@@ -282,7 +282,7 @@ private fun kotlinx.serialization.json.JsonArrayBuilder.addSelfManagementDefinit
     ))
     add(agentToolDefinition(
         "aether_extension_manage",
-        "List, install, update, remove, or reload Aether/Pi extension packages, or invoke a registered command. Package sources use npm:, including npm:<name>@file:<absolute-directory>.",
+        "List, install, update, remove, or reload Creo/Pi extension packages, or invoke a registered command. Package sources use npm:, including npm:<name>@file:<absolute-directory>.",
         "sequential",
         listOf("action"),
         mapOf(
@@ -296,7 +296,7 @@ private fun kotlinx.serialization.json.JsonArrayBuilder.addSelfManagementDefinit
     ))
     add(agentToolDefinition(
         "aether_developer_manage",
-        "Read non-sensitive Aether runtime diagnostics.",
+        "Read non-sensitive Creo runtime diagnostics.",
         "parallel",
         listOf("action"),
         mapOf(
@@ -360,7 +360,7 @@ private inline fun agentToolSuccess(
 private fun agentToolFailure(error: Throwable): SharedHostToolResult = SharedHostToolResult(
     buildJsonObject {
         put("ok", false)
-        put("errmsg", error.message ?: "Aether host tool failed.")
+        put("errmsg", error.message ?: "Creo host tool failed.")
     }.toString(),
     isError = true,
 )

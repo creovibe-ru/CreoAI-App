@@ -143,7 +143,7 @@ class AgentModeController(
                 )
                 _authorizationState.value = if (!PhoneUseAccessibilityService.connected.value) {
                     AgentModeAuthorizationState(AgentModeAuthorizationIssue.AccessibilityMissing,
-                        "Enable Aether in Android Accessibility settings.")
+                        "Enable Creo in Android Accessibility settings.")
                 } else if (grantResult == PackageManager.PERMISSION_GRANTED) {
                     diagnosticLogger.event(
                         category = "agent_mode",
@@ -161,7 +161,7 @@ class AgentModeController(
                     )
                     AgentModeAuthorizationState(
                         issue = AgentModeAuthorizationIssue.ShizukuPermissionDenied,
-                        detail = "Shizuku permission was denied. Grant Aether permission in Shizuku before using Phone Use.",
+                        detail = "Shizuku permission was denied. Grant Creo permission in Shizuku before using Phone Use.",
                     )
                 }
                 controllerScope.launch {
@@ -353,9 +353,9 @@ class AgentModeController(
                         JSONObject().apply {
                             put("ok", !returnToAether || returned)
                             put("returned_to_aether", returned)
-                            put("stdout", if (returned) "Phone Use stopped. Aether is now in the foreground."
+                            put("stdout", if (returned) "Phone Use stopped. Creo is now in the foreground."
                                 else "Phone Use session stopped.")
-                            if (returnToAether && !returned) put("errmsg", "Phone Use stopped, but Android did not confirm that Aether returned to the foreground.")
+                            if (returnToAether && !returned) put("errmsg", "Phone Use stopped, but Android did not confirm that Creo returned to the foreground.")
                         }.toString()
                     }
                     else -> invalidArguments("Unsupported action '$action'.")
@@ -1178,10 +1178,10 @@ class AgentModeController(
             )
             _authorizationState.value = AgentModeAuthorizationState(
                 issue = AgentModeAuthorizationIssue.RootPermissionDenied,
-                detail = "Root Phone Use service failed to start. Check that su can be granted to Aether.",
+                detail = "Root Phone Use service failed to start. Check that su can be granted to Creo.",
             )
             error(
-                "Root Phone Use service failed to start. Check that su can be granted to Aether. " +
+                "Root Phone Use service failed to start. Check that su can be granted to Creo. " +
                     throwable.message.orEmpty()
             )
         }
@@ -1208,7 +1208,7 @@ class AgentModeController(
             error("Shizuku is not running.")
         }
         if (Shizuku.checkSelfPermission() != PackageManager.PERMISSION_GRANTED) {
-            error("Aether does not have Shizuku permission. Grant it in Shizuku first.")
+            error("Creo does not have Shizuku permission. Grant it in Shizuku first.")
         }
         diagnosticLogger.event(
             category = "agent_mode",
@@ -1267,7 +1267,7 @@ class AgentModeController(
 
             !PhoneUseAccessibilityService.connected.value -> AgentModeAuthorizationState(
                 issue = AgentModeAuthorizationIssue.AccessibilityMissing,
-                detail = "Enable Aether in Android Accessibility settings.",
+                detail = "Enable Creo in Android Accessibility settings.",
             )
 
             settings.phoneUseAuthorizationMethod == AgentModeAuthorizationMethod.Accessibility -> AgentModeAuthorizationState(
@@ -1319,13 +1319,13 @@ class AgentModeController(
 
             probe.timedOut -> AgentModeAuthorizationState(
                 issue = AgentModeAuthorizationIssue.RootPermissionMissing,
-                detail = "Root authorization timed out. Grant su to Aether, then refresh Phone Use status.",
+                detail = "Root authorization timed out. Grant su to Creo, then refresh Phone Use status.",
             )
 
             else -> AgentModeAuthorizationState(
                 issue = AgentModeAuthorizationIssue.RootPermissionDenied,
                 detail = probe.combinedOutput().ifBlank {
-                    "Root authorization was not granted. Grant su to Aether, then refresh Phone Use status."
+                    "Root authorization was not granted. Grant su to Creo, then refresh Phone Use status."
                 }.take(280),
             )
         }
@@ -1354,7 +1354,7 @@ class AgentModeController(
             } else {
                 AgentModeAuthorizationState(
                     issue = AgentModeAuthorizationIssue.ShizukuPermissionMissing,
-                    detail = "Grant Aether permission in Shizuku before using Phone Use.",
+                    detail = "Grant Creo permission in Shizuku before using Phone Use.",
                 )
             }
         }.getOrElse { throwable ->

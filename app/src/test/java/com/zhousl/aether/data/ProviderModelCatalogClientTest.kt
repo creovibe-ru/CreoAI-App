@@ -88,7 +88,7 @@ class ProviderModelCatalogClientTest {
                     modelId = "gpt-test",
                     userAgent = "CatalogClient/1.0",
                     customHeaders = listOf(
-                        LlmCustomHeader("X-Aether-Test", "models"),
+                        LlmCustomHeader("X-Creo-Test", "models"),
                         LlmCustomHeader("User-Agent", "ignored"),
                     ),
                 )
@@ -97,7 +97,7 @@ class ProviderModelCatalogClientTest {
             assertEquals(listOf("gpt-test"), result.models)
             val request = server.takeRequest()
             assertEquals("CatalogClient/1.0", request.getHeader("User-Agent"))
-            assertEquals("models", request.getHeader("X-Aether-Test"))
+            assertEquals("models", request.getHeader("X-Creo-Test"))
         } finally {
             server.shutdown()
         }

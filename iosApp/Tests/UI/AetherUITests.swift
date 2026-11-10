@@ -195,7 +195,7 @@ final class AetherUITests: XCTestCase {
             XCTAssertEqual(
                 app.state,
                 .runningForeground,
-                "Aether left the foreground \(second) seconds after sending a message"
+                "Creo left the foreground \(second) seconds after sending a message"
             )
             Thread.sleep(forTimeInterval: 1)
         }
@@ -317,10 +317,10 @@ final class AetherUITests: XCTestCase {
             privacyAgreement.tap()
         }
         XCTAssertTrue(app.buttons["Get started"].waitForExistence(timeout: 20))
-        XCTAssertTrue(app.staticTexts["Welcome to Aether"].exists)
+        XCTAssertTrue(app.staticTexts["Welcome to Creo"].exists)
         app.buttons["Get started"].tap()
 
-        XCTAssertTrue(app.staticTexts["Set up the built-in Alpine Linux environment. It stays inside Aether's private app storage."].waitForExistence(timeout: 20))
+        XCTAssertTrue(app.staticTexts["Set up the built-in Alpine Linux environment. It stays inside Creo's private app storage."].waitForExistence(timeout: 20))
         XCTAssertTrue(app.buttons["Initialize"].waitForExistence(timeout: 20))
         app.buttons["Initialize"].tap()
         let setupDetails = app.descendants(matching: .any)

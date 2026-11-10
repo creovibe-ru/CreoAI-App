@@ -230,7 +230,7 @@ interface AgentSessionState {
   lastAccessedAt: number;
 }
 
-// Pi reports usage per API call; one Aether turn can issue several calls
+// Pi reports usage per API call; one Creo turn can issue several calls
 // (tool loops, auto retries, follow-ups), so the bridge accumulates them and
 // hands the app a per-turn total.
 interface TurnUsageTotals {
@@ -496,7 +496,7 @@ function requestAetherHost(method: string, args: JsonObject): Promise<JsonObject
     : aetherSubscriberRequestIds.values().next().value;
   if (!requestId) {
     bridgeDebug("aether_host_call_no_subscriber", { method });
-    throw new Error("The Aether app host is not subscribed.");
+    throw new Error("The Creo app host is not subscribed.");
   }
   const callId = `aether-host-${Date.now()}-${++aetherHostCallCounter}`;
   bridgeDebug("aether_host_call_start", { call_id: callId, method, routed_request_id: requestId });
@@ -514,7 +514,7 @@ function requestAetherHost(method: string, args: JsonObject): Promise<JsonObject
         method,
         elapsed_ms: elapsedMillis(startedAt),
       });
-      reject(new Error(`Aether host call timed out: ${method}`));
+      reject(new Error(`Creo host call timed out: ${method}`));
     }, 2 * 60 * 1000);
     pendingAetherHostCalls.set(callId, { resolve, reject, timeout });
   });
@@ -545,7 +545,7 @@ function resolveAetherHostCall(payload: JsonObject): boolean {
   if (asBoolean(payload.ok, true)) {
     pending.resolve(asObject(payload.result));
   } else {
-    pending.reject(new Error(asString(payload.error, "Aether host call failed.")));
+    pending.reject(new Error(asString(payload.error, "Creo host call failed.")));
   }
   return true;
 }
@@ -1363,14 +1363,14 @@ function buildModels(config: ModelConfig): {
     headers,
     auth: {
       apiKey: {
-        name: "Aether provider credentials",
+        name: "Creo provider credentials",
         resolve: async () => ({
           auth: {
             apiKey: config.api_key || undefined,
             baseUrl: config.base_url || undefined,
             headers,
           },
-          source: "Aether",
+          source: "Creo",
         }),
       },
     },
@@ -2467,7 +2467,7 @@ function extensionUiContext(): ExtensionUIContext {
     setEditorComponent: () => undefined,
     getTheme: () => undefined,
     getAllThemes: () => [],
-    setTheme: () => ({ success: false, error: "Pi TUI components are unavailable in Aether." }),
+    setTheme: () => ({ success: false, error: "Pi TUI components are unavailable in Creo." }),
     getToolsExpanded: () => false,
     setToolsExpanded: () => undefined,
   } as unknown as ExtensionUIContext;
@@ -2477,7 +2477,7 @@ const aetherChromeExtensionFactory: ExtensionFactory = (pi) => {
   pi.registerTool({
     name: "browser",
     label: "Browser",
-    description: "Control Aether's Chromium browser. Prefer CSS selectors and DOM-reading actions; use normalized coordinates only as a fallback.",
+    description: "Control Creo's Chromium browser. Prefer CSS selectors and DOM-reading actions; use normalized coordinates only as a fallback.",
     promptSnippet: "control the optional browser",
     executionMode: "sequential",
     parameters: Type.Object({
@@ -2982,7 +2982,7 @@ async function compactNativeAgentSession(id: string, payload: JsonObject): Promi
 async function navigateNativeAgentSession(id: string, payload: JsonObject): Promise<JsonObject> {
   // The AgentSession map is process-local. Reopen the persisted JSONL session
   // when the bridge was restarted, provided the caller supplies its model
-  // configuration (the normal Aether navigation path does).
+  // configuration (the normal Creo navigation path does).
   const state = await ensureNativeSessionForRequest(payload);
   if (!state.session.isIdle) throw new Error("Cannot navigate a busy Pi AgentSession.");
   const entryId = asString(payload.entry_id).trim();
@@ -3499,7 +3499,7 @@ async function reloadAllExtensionSessions(
   payload: JsonObject = {},
 ): Promise<JsonObject> {
   const loadOptions = nativeExtensionLoadOptionsFromPayload(payload);
-  // Preinstalled packages can provide both Pi and Aether entrypoints. Resolve
+  // Preinstalled packages can provide both Pi and Creo entrypoints. Resolve
   // their npm dependencies before reloading native Pi sessions so both loaders
   // observe the same ready package tree.
   const skipAetherExtensions = asBoolean(payload.skip_aether_extensions, false);
@@ -3538,8 +3538,8 @@ async function reloadAllExtensionSessions(
     result.reloaded === true || result.scheduled === true
   );
   return {
-    // Aether Script extensions are reloaded independently. Keep the session
-    // operation usable when one unrelated Aether extension remains broken; its
+    // Creo Script extensions are reloaded independently. Keep the session
+    // operation usable when one unrelated Creo extension remains broken; its
     // details are still returned in aether_reload.errors for diagnostics.
     succeeded: sessionReloadSucceeded,
     session_count: results.length,

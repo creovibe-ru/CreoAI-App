@@ -39,7 +39,7 @@ private const val RootUid = 0
 
 /**
  * The privileged Virtual Display lifecycle service. UI operations use PhoneUseAccessibilityService. It runs in a separate shell (Shizuku) or root process started
- * by [AgentModeServiceStarter], which passes a [context] for Aether in the launching Android user.
+ * by [AgentModeServiceStarter], which passes a [context] for Creo in the launching Android user.
  */
 class AetherAgentModeShizukuService @Keep constructor(
     private val context: Context,
@@ -52,7 +52,7 @@ class AetherAgentModeShizukuService @Keep constructor(
     /**
      * This process runs as shell (Shizuku) or root, both in user 0, while [context] belongs to the
      * Android user that launched it. Package queries, activity launches are
-     * per-user, so each call targets the Android user that owns the calling Aether process, never
+     * per-user, so each call targets the Android user that owns the calling Creo process, never
      * the process's own user nor the user [context] happens to be bound to.
      */
     private val userContexts = ConcurrentHashMap<UserHandle, Context>()
@@ -142,7 +142,7 @@ class AetherAgentModeShizukuService @Keep constructor(
 
     override fun attachPreviewSurface(displayId: Int, surface: Surface) {
         val display = displays[displayId]
-            ?: error("Display $displayId is not managed by Aether Phone Use.")
+            ?: error("Display $displayId is not managed by Creo Phone Use.")
         synchronized(displayLock(displayId)) {
             previewSurfaces[displayId] = surface
             display.setSurface(surface)
@@ -151,7 +151,7 @@ class AetherAgentModeShizukuService @Keep constructor(
 
     override fun detachPreviewSurface(displayId: Int) {
         val display = displays[displayId]
-            ?: error("Display $displayId is not managed by Aether Phone Use.")
+            ?: error("Display $displayId is not managed by Creo Phone Use.")
         synchronized(displayLock(displayId)) {
             previewSurfaces.remove(displayId)
             display.setSurface(imageReaders[displayId]?.surface)
@@ -294,7 +294,7 @@ class AetherAgentModeShizukuService @Keep constructor(
 
     private fun ensureManagedDisplay(displayId: Int) {
         if (!displays.containsKey(displayId)) {
-            error("Display $displayId is not managed by Aether Phone Use.")
+            error("Display $displayId is not managed by Creo Phone Use.")
         }
     }
 

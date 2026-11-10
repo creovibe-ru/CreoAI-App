@@ -802,7 +802,7 @@ private fun AetherAppContent(
                 onRenameSession = viewModel::renameSession,
                 onExportSession = { session ->
                     pendingSessionExportId = session.id
-                    sessionExportLauncher.launch("${session.title.ifBlank { "aether-session" }}.json")
+                    sessionExportLauncher.launch("${session.title.ifBlank { "creo-session" }}.json")
                 },
                 onDeleteSession = viewModel::deleteSession,
                 onSettingsSelected = {
@@ -1150,7 +1150,7 @@ private fun AetherAppContent(
                         showAppDataExportWarning = true
                     },
                     onExportLogs = {
-                        logExportLauncher.launch("aether-logs.txt")
+                        logExportLauncher.launch("creo-logs.txt")
                     },
                     onOpenAppPermissions = {
                         startTermuxSetupAction("settings_app_permissions") { openAppPermissionSettings(context) }
@@ -1246,7 +1246,7 @@ private fun AetherAppContent(
                     TextButton(
                         onClick = {
                             showAppDataExportWarning = false
-                            appDataExportLauncher.launch("aether-data.json")
+                            appDataExportLauncher.launch("creo-data.json")
                         },
                     ) {
                         Text(stringResource(R.string.common_export))
@@ -1799,7 +1799,7 @@ private fun MessageBubble(message: ChatMessage) {
                 modifier = Modifier
                     .clip(RoundedCornerShape(22.dp))
                     .background(
-                        Brush.horizontalGradient(listOf(Color(0xFF5B36D7), Color(0xFF6E48FF)))
+                        Brush.horizontalGradient(listOf(Color(0xFF15803D), Color(0xFF22C55E)))
                     )
                     .padding(horizontal = 18.dp, vertical = 14.dp),
                 style = MaterialTheme.typography.bodyLarge,
@@ -1812,7 +1812,7 @@ private fun MessageBubble(message: ChatMessage) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
-                text = "Aether",
+                text = "Creo AI",
                 style = MaterialTheme.typography.labelLarge,
                 color = AetherOnSurfaceVariant,
             )

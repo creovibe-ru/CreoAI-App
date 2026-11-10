@@ -37,7 +37,7 @@ final class AetherAlpineNetworkAccess {
 
     func check(completion: @escaping (Result<Void, Error>) -> Void) {
         let session = URLSession(configuration: Self.configuration(configuration()))
-        let results = DispatchQueue(label: "com.baimoqilin.aether.alpine-network-check")
+        let results = DispatchQueue(label: "com.creoai.app.alpine-network-check")
         // Either repository is sufficient, including where the official CDN is unreachable.
         let urls = [alpineOfficialRepository, alpineChinaRepository].map { URL(string: $0 + "/")! }
         var remaining = urls.count
@@ -63,8 +63,8 @@ final class AetherAlpineNetworkAccess {
                     session.invalidateAndCancel()
                     let restricted = denied || self.cellularData.restrictedState == .restricted
                     let message = restricted
-                        ? "Network access is disabled for Aether. In iOS Settings > Apps > Aether, allow Wireless Data / Cellular Data, then retry Alpine initialization."
-                        : "Cannot connect to the Alpine repositories. Connect to the internet and allow network access for Aether if iOS asks, then retry. If access was previously denied, enable Wireless Data / Cellular Data in iOS Settings > Apps > Aether."
+                        ? "Network access is disabled for Creo AI. In iOS Settings > Apps > Creo AI, allow Wireless Data / Cellular Data, then retry Alpine initialization."
+                        : "Cannot connect to the Alpine repositories. Connect to the internet and allow network access for Creo AI if iOS asks, then retry. If access was previously denied, enable Wireless Data / Cellular Data in iOS Settings > Apps > Creo AI."
                     completion(.failure(NSError(
                         domain: "AetherAlpineNetworkAccess", code: restricted ? 1 : 2,
                         userInfo: [NSLocalizedDescriptionKey: message]
@@ -126,7 +126,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
     static let shared = AetherRuntimeHost()
 
     private let runtime = AetherISHRuntime.shared()
-    private let operations = DispatchQueue(label: "com.baimoqilin.aether.runtime-host")
+    private let operations = DispatchQueue(label: "com.creoai.app.runtime-host")
     private let networkAccess = AetherAlpineNetworkAccess()
     private var initialized = false
     private var initializationInProgress = false
@@ -158,7 +158,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             timeoutInterval: 4
         )
         request.setValue("text/plain", forHTTPHeaderField: "Accept")
-        request.setValue("Aether-Alpine-Network-Check", forHTTPHeaderField: "User-Agent")
+        request.setValue("Creo-Alpine-Network-Check", forHTTPHeaderField: "User-Agent")
         session.dataTask(with: request) { [weak self] data, response, _ in
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             let countryCode = data.flatMap { String(data: $0, encoding: .utf8) }.flatMap(cloudflareCountryCode)
@@ -660,7 +660,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             do {
                 guard maximumBytes >= 0, maximumBytes <= Int64(Int.max) else {
                     throw NSError(
-                        domain: "com.baimoqilin.aether.runtime-host",
+                        domain: "com.creoai.app.runtime-host",
                         code: 1,
                         userInfo: [NSLocalizedDescriptionKey: "Invalid file size limit."]
                     )
@@ -678,7 +678,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             do {
                 guard maximumBytes >= 0, maximumBytes <= Int64(Int.max) else {
                     throw NSError(
-                        domain: "com.baimoqilin.aether.runtime-host",
+                        domain: "com.creoai.app.runtime-host",
                         code: 1,
                         userInfo: [NSLocalizedDescriptionKey: "Invalid file size limit."]
                     )
@@ -1381,7 +1381,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             }
         ) else {
             throw NSError(
-                domain: "com.baimoqilin.aether.file-picker",
+                domain: "com.creoai.app.file-picker",
                 code: 2,
                 userInfo: [NSLocalizedDescriptionKey: "Unable to read the selected folder."]
             )
@@ -1401,7 +1401,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             let size = values.fileSize ?? 0
             guard size <= maximumPickedDirectoryEntryBytes else {
                 throw NSError(
-                    domain: "com.baimoqilin.aether.file-picker",
+                    domain: "com.creoai.app.file-picker",
                     code: 3,
                     userInfo: [NSLocalizedDescriptionKey: "A file in the selected folder is too large: \(relativePath)"]
                 )
@@ -1409,7 +1409,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             files.append((fileURL, relativePath, size))
             guard files.count <= maximumPickedDirectoryEntries else {
                 throw NSError(
-                    domain: "com.baimoqilin.aether.file-picker",
+                    domain: "com.creoai.app.file-picker",
                     code: 4,
                     userInfo: [NSLocalizedDescriptionKey: "The selected folder contains too many files."]
                 )
@@ -1417,7 +1417,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             totalBytes += size
             guard totalBytes <= maximumPickedDirectoryBytes else {
                 throw NSError(
-                    domain: "com.baimoqilin.aether.file-picker",
+                    domain: "com.creoai.app.file-picker",
                     code: 5,
                     userInfo: [NSLocalizedDescriptionKey: "The selected folder is too large."]
                 )
@@ -1429,7 +1429,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
             let data = try Data(contentsOf: file.url, options: .mappedIfSafe)
             guard data.count <= maximumPickedDirectoryEntryBytes else {
                 throw NSError(
-                    domain: "com.baimoqilin.aether.file-picker",
+                    domain: "com.creoai.app.file-picker",
                     code: 3,
                     userInfo: [NSLocalizedDescriptionKey: "A file in the selected folder is too large: \(file.relativePath)"]
                 )
@@ -1504,7 +1504,7 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
     }
 
     private func alpineRuntimeRootURL() throws -> URL {
-        if let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.baimoqilin.aether") {
+        if let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.creoai.app") {
             return container.appendingPathComponent("AetherAlpine", isDirectory: true)
         }
         let applicationSupport = try FileManager.default.url(
@@ -1536,9 +1536,9 @@ final class AetherRuntimeHost: NSObject, NativeRuntimeHost, UIDocumentPickerDele
         guard FileManager.default.fileExists(atPath: marker.path) else { return }
         guard !runtime.isInitialized else {
             throw NSError(
-                domain: "com.baimoqilin.aether.runtime-host",
+                domain: "com.creoai.app.runtime-host",
                 code: 2,
-                userInfo: [NSLocalizedDescriptionKey: "Restart Aether to finish resetting Alpine."]
+                userInfo: [NSLocalizedDescriptionKey: "Restart Creo AI to finish resetting Alpine."]
             )
         }
         let root = try alpineRuntimeRootURL()
@@ -1768,14 +1768,14 @@ private final class AetherBackgroundExecutionCoordinator {
     private var lastProgressAdvance = Date.distantPast
 
     private var taskIdentifierPrefix: String {
-        "\(Bundle.main.bundleIdentifier ?? "com.baimoqilin.aether").agent"
+        "\(Bundle.main.bundleIdentifier ?? "com.creoai.app").agent"
     }
 
     func register() {
         onMainSync {
             guard #available(iOS 26.0, *) else { return }
             if UIApplication.shared.backgroundRefreshStatus != .available {
-                NSLog("Aether background refresh is unavailable (status: %ld)",
+                NSLog("Creo background refresh is unavailable (status: %ld)",
                       UIApplication.shared.backgroundRefreshStatus.rawValue)
             }
         }
@@ -1841,11 +1841,11 @@ private final class AetherBackgroundExecutionCoordinator {
             self.onMain { self.attach(task) }
         }
         guard registered else {
-            NSLog("Aether continued-processing task handler was not registered for %@", identifier)
+            NSLog("Creo continued-processing task handler was not registered for %@", identifier)
             return
         }
         continuedTaskIdentifier = identifier
-        NSLog("Aether continued-processing task handler registered for %@", identifier)
+        NSLog("Creo continued-processing task handler registered for %@", identifier)
         let request = BGContinuedProcessingTaskRequest(
             identifier: identifier,
             title: name,
@@ -1857,19 +1857,19 @@ private final class AetherBackgroundExecutionCoordinator {
         do {
             try scheduler.submit(request)
             continuedTaskSubmitted = true
-            NSLog("Aether continued-processing task submitted for %@", identifier)
+            NSLog("Creo continued-processing task submitted for %@", identifier)
         } catch {
             continuedTaskSubmitted = false
             continuedTaskIdentifier = nil
             let nsError = error as NSError
-            NSLog("Aether continued-processing task submission failed (%@/%ld): %@",
+            NSLog("Creo continued-processing task submission failed (%@/%ld): %@",
                   nsError.domain, nsError.code, nsError.localizedDescription)
         }
     }
 
     @available(iOS 26.0, *)
     private func attach(_ task: BGContinuedProcessingTask) {
-        NSLog("Aether continued-processing task started for %@", task.identifier)
+        NSLog("Creo continued-processing task started for %@", task.identifier)
         guard task.identifier == continuedTaskIdentifier else {
             task.setTaskCompleted(success: false)
             return

@@ -26,9 +26,9 @@ actual fun platformLanguageTag(): String =
         ?: NSLocale.currentLocale.languageCode
 
 actual fun platformDefaultSystemPrompt(): String =
-    "You are Aether, a local-first agent that can call tools and complete tasks on-device. Use available tools instead of guessing local state."
+    "You are Creo, a local-first agent that can call tools and complete tasks on-device. Use available tools instead of guessing local state."
 
-actual fun platformDefaultLlmUserAgent(): String = "Aether/1.0 (iOS)"
+actual fun platformDefaultLlmUserAgent(): String = "Creo/1.0 (iOS)"
 
 actual fun platformDynamicPromptValues(): Map<String, String> {
     val now = NSDate()

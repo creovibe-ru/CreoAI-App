@@ -758,7 +758,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-framework AetherShared";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.baimoqilin.aether.runtime-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.creoai.app.runtime-tests";
 				PRODUCT_MODULE_NAME = AetherRuntimeTests;
 				PRODUCT_NAME = AetherRuntimeTests;
 				SDKROOT = iphoneos;
@@ -831,7 +831,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baimoqilin.aether.fileprovider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creoai.app.fileprovider;
 				PRODUCT_MODULE_NAME = AetherFileProvider;
 				PRODUCT_NAME = AetherFileProvider;
 				SDKROOT = iphoneos;
@@ -850,7 +850,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.baimoqilin.aether.fileprovider;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creoai.app.fileprovider;
 				PRODUCT_MODULE_NAME = AetherFileProvider;
 				PRODUCT_NAME = AetherFileProvider;
 				SDKROOT = iphoneos;
@@ -894,7 +894,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.baimoqilin.aether.fileprovider-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.creoai.app.fileprovider-tests";
 				PRODUCT_MODULE_NAME = AetherFileProviderTests;
 				PRODUCT_NAME = AetherFileProviderTests;
 				SDKROOT = iphoneos;
@@ -913,7 +913,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.baimoqilin.aether.fileprovider-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.creoai.app.fileprovider-tests";
 				PRODUCT_MODULE_NAME = AetherFileProviderTests;
 				PRODUCT_NAME = AetherFileProviderTests;
 				SDKROOT = iphoneos;
@@ -932,7 +932,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-framework AetherShared";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.baimoqilin.aether.runtime-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.creoai.app.runtime-tests";
 				PRODUCT_MODULE_NAME = AetherRuntimeTests;
 				PRODUCT_NAME = AetherRuntimeTests;
 				SDKROOT = iphoneos;
@@ -953,7 +953,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.baimoqilin.aether.ui-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.creoai.app.ui-tests";
 				PRODUCT_MODULE_NAME = AetherUITests;
 				PRODUCT_NAME = AetherUITests;
 				SDKROOT = iphoneos;
@@ -1054,7 +1054,7 @@
 					"@loader_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.baimoqilin.aether.ui-tests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.creoai.app.ui-tests";
 				PRODUCT_MODULE_NAME = AetherUITests;
 				PRODUCT_NAME = AetherUITests;
 				SDKROOT = iphoneos;

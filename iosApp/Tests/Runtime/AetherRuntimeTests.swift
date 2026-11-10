@@ -230,7 +230,7 @@ final class AetherRuntimeTests: XCTestCase {
             case .success: XCTFail("Denied network must not start setup")
             case .failure(let error):
                 XCTAssertEqual((error as NSError).code, 1)
-                XCTAssertTrue(error.localizedDescription.contains("iOS Settings > Apps > Aether"))
+                XCTAssertTrue(error.localizedDescription.contains("iOS Settings > Apps > Creo"))
             }
             denied.fulfill()
         }

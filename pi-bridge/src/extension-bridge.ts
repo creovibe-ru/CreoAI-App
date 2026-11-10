@@ -114,13 +114,13 @@ function requestHost(method: string, args: JsonObject): Promise<JsonObject> {
   const requestId = operationRequestId && activeOperationRequestIds.has(operationRequestId)
     ? operationRequestId
     : subscriberRequestIds.values().next().value;
-  if (!requestId) throw new Error("The Aether app host is not subscribed.");
+  if (!requestId) throw new Error("The Creo app host is not subscribed.");
   const callId = `aether-host-${Date.now()}-${++hostCallCounter}`;
   writeEvent(requestId, "aether_host_call", { call_id: callId, method, args });
   return new Promise<JsonObject>((resolve, reject) => {
     const timeout = setTimeout(() => {
       pendingHostCalls.delete(callId);
-      reject(new Error(`Aether host call timed out: ${method}`));
+      reject(new Error(`Creo host call timed out: ${method}`));
     }, 2 * 60 * 1000);
     pendingHostCalls.set(callId, { resolve, reject, timeout });
   });
@@ -142,7 +142,7 @@ function resolveHostCall(payload: JsonObject): boolean {
   pendingHostCalls.delete(callId);
   clearTimeout(pending.timeout);
   if (asBoolean(payload.ok, true)) pending.resolve(asObject(payload.result));
-  else pending.reject(new Error(asString(payload.error, "Aether host call failed.")));
+  else pending.reject(new Error(asString(payload.error, "Creo host call failed.")));
   return true;
 }
 

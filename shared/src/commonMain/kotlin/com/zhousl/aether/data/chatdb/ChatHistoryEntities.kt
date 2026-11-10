@@ -40,7 +40,7 @@ data class ChatAgentSessionEntity(
     val updatedAtMillis: Long = 0L,
 )
 
-/** Maps Aether message IDs to Pi entry IDs across active and inactive branches. */
+/** Maps Creo message IDs to Pi entry IDs across active and inactive branches. */
 @Entity(
     tableName = "chat_agent_message_refs",
     primaryKeys = ["chatSessionId", "aetherMessageId", "piEntryId"],

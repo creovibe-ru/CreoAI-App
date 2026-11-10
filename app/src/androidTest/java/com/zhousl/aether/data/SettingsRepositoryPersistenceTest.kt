@@ -26,7 +26,7 @@ class SettingsRepositoryPersistenceTest {
             providerEnvironmentVariables = listOf(PiProviderEnvironmentVariable("REGION", "test")),
             baseUrl = "https://provider.example/v1",
             modelId = "chat-model",
-            userAgent = "Aether-Test",
+            userAgent = "Creo-Test",
             customHeaders = listOf(LlmCustomHeader("X-Test", "value")),
             developerRoleUnsupported = true,
             reasoningEffort = "high",

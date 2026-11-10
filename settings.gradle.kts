@@ -15,7 +15,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Aether"
+rootProject.name = "CreoAI"
 include(":shared")
 
 val sharedOnly = providers.gradleProperty("aether.sharedOnly").orNull.toBoolean()

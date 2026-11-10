@@ -143,13 +143,13 @@ class AetherNativeComponentRegistry {
         val normalizedTarget = target.trim()
         val normalizedId = id.trim()
         require(normalizedTarget.isNotBlank()) {
-            "Aether native components require a target."
+            "Creo native components require a target."
         }
         require(normalizedId.isNotBlank()) {
-            "Aether native components require an id."
+            "Creo native components require an id."
         }
         require(mode == AetherNativeComponentMode.Hide || renderer != null) {
-            "Aether native component $normalizedId requires a renderer for mode $mode."
+            "Creo native component $normalizedId requires a renderer for mode $mode."
         }
         val registration = AetherNativeComponentRegistration(
             target = normalizedTarget,

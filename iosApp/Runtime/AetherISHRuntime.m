@@ -29,8 +29,8 @@
 #include "fs/real.h"
 #include "tools/fakefs.h"
 
-static NSString *const AetherISHErrorDomain = @"com.baimoqilin.aether.ish";
-static NSString *const AetherFileProviderDomainIdentifier = @"com.baimoqilin.aether";
+static NSString *const AetherISHErrorDomain = @"com.creoai.app.ish";
+static NSString *const AetherFileProviderDomainIdentifier = @"com.creoai.app";
 static NSString *const AetherFileProviderEventDatabaseName = @"file-provider-events.sqlite";
 
 static void AetherSignalFileProviderWorkingSet(void) {
@@ -42,11 +42,11 @@ static void AetherSignalFileProviderWorkingSet(void) {
             signalPending = NO;
             NSFileProviderDomain *domain = [[NSFileProviderDomain alloc]
                 initWithIdentifier:AetherFileProviderDomainIdentifier
-                displayName:@"Aether"];
+                displayName:@"Creo AI"];
             NSFileProviderManager *manager = [NSFileProviderManager managerForDomain:domain];
             [manager signalEnumeratorForContainerItemIdentifier:NSFileProviderWorkingSetContainerItemIdentifier
                                                completionHandler:^(NSError *error) {
-                if (error) NSLog(@"Aether File Provider change signal failed: %@", error);
+                if (error) NSLog(@"Creo File Provider change signal failed: %@", error);
             }];
         });
     });
@@ -204,7 +204,7 @@ static void AetherISHProcessExited(struct task *task, int code) {
 }
 
 static void AetherISHDie(const char *message) {
-    NSLog(@"Aether iSH fatal error: %s", message ?: "unknown");
+    NSLog(@"Creo iSH fatal error: %s", message ?: "unknown");
 }
 
 @implementation AetherISHRuntime
@@ -221,9 +221,9 @@ static void AetherISHDie(const char *message) {
 - (instancetype)initPrivate {
     self = [super init];
     if (self) {
-        _queue = dispatch_queue_create("com.baimoqilin.aether.ish", DISPATCH_QUEUE_SERIAL);
+        _queue = dispatch_queue_create("com.creoai.app.ish", DISPATCH_QUEUE_SERIAL);
         dispatch_queue_set_specific(_queue, AetherISHQueueKey, AetherISHQueueKey, NULL);
-        _outputQueue = dispatch_queue_create("com.baimoqilin.aether.ish.output", DISPATCH_QUEUE_CONCURRENT);
+        _outputQueue = dispatch_queue_create("com.creoai.app.ish.output", DISPATCH_QUEUE_CONCURRENT);
         _processes = [NSMutableDictionary dictionary];
         activeRuntime = self;
     }
@@ -263,7 +263,7 @@ static void AetherISHDie(const char *message) {
 
 - (NSURL *)prepareRootFileSystemWithProgress:(AetherISHProgressBlock)progress
                                        error:(NSError **)error {
-    NSURL *container = [NSFileManager.defaultManager containerURLForSecurityApplicationGroupIdentifier:@"group.com.baimoqilin.aether"];
+    NSURL *container = [NSFileManager.defaultManager containerURLForSecurityApplicationGroupIdentifier:@"group.com.creoai.app"];
     NSURL *legacySupport = [NSFileManager.defaultManager URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
     NSURL *rootURL = container ? [container URLByAppendingPathComponent:@"AetherAlpine" isDirectory:YES] : (legacySupport ? [legacySupport URLByAppendingPathComponent:@"AetherAlpine" isDirectory:YES] : nil);
     if (!rootURL) { if (error) *error = AetherISHError(2, @"Storage unavailable."); return nil; }

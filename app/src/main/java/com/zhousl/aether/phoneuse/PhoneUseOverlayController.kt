@@ -94,7 +94,7 @@ internal class PhoneUseOverlayController(
         }
         state = next
         if (next != null) {
-            // agent_display starts in Aether before launching another app. Prepare native
+            // agent_display starts in Creo before launching another app. Prepare native
             // shader/blur resources here, outside the edge's first visible animation frame.
             if (preparedEdge == null) preparedEdge = createEdgeView()
             entranceBlur.size
@@ -486,5 +486,5 @@ internal class PhoneUseOverlayController(
     private fun dp(value: Int): Int = (value * density).roundToInt()
     private fun motionDuration(millis: Long): Long = if (ValueAnimator.areAnimatorsEnabled()) millis else 0
 
-    companion object { const val WINDOW_PREFIX = "Aether Phone Use" }
+    companion object { const val WINDOW_PREFIX = "Creo Phone Use" }
 }

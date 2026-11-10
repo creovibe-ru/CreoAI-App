@@ -27,7 +27,7 @@ class AetherSelfManagementTool(
     fun toolDefinitions(): List<JSONObject> = listOf(
         buildAetherToolDefinition(
             name = "aether_config_get",
-            description = "Read Aether app configuration for general preferences, reliability, Skills, Termux, Phone Use, scheduled tasks, and developer diagnostics. Provider and model configuration is intentionally omitted.",
+            description = "Read Creo app configuration for general preferences, reliability, Skills, Termux, Phone Use, scheduled tasks, and developer diagnostics. Provider and model configuration is intentionally omitted.",
             properties = JSONObject().apply {
                 put(
                     "categories",
@@ -60,7 +60,7 @@ class AetherSelfManagementTool(
         ),
         buildAetherToolDefinition(
             name = "aether_config_set",
-            description = "Modify allowed Aether settings. This tool cannot modify LLM provider, model, base URL, provider API keys, or default model selections.",
+            description = "Modify allowed Creo settings. This tool cannot modify LLM provider, model, base URL, provider API keys, or default model selections.",
             properties = JSONObject().apply {
                 put(
                     "category",
@@ -83,7 +83,7 @@ class AetherSelfManagementTool(
         ),
         buildAetherToolDefinition(
             name = "aether_skill_manage",
-            description = "List, install, enable, disable, or remove Aether Agent Skills. Remote installs accept GitHub repository URLs or zip URLs supported by Aether.",
+            description = "List, install, enable, disable, or remove Creo Agent Skills. Remote installs accept GitHub repository URLs or zip URLs supported by Creo.",
             properties = JSONObject().apply {
                 put(
                     "action",
@@ -100,7 +100,7 @@ class AetherSelfManagementTool(
         ),
         buildAetherToolDefinition(
             name = "aether_termux_manage",
-            description = "Inspect Aether's Termux integration without using the bash tool.",
+            description = "Inspect Creo's Termux integration without using the bash tool.",
             properties = JSONObject().apply {
                 put(
                     "action",
@@ -169,7 +169,7 @@ class AetherSelfManagementTool(
         ),
         buildAetherToolDefinition(
             name = "aether_scheduled_task_manage",
-            description = "List, create, update, enable, disable, or remove Aether scheduled tasks. Scheduled tasks wake Aether at the next matching time and run the prompt as an automated Agent turn.",
+            description = "List, create, update, enable, disable, or remove Creo scheduled tasks. Scheduled tasks wake Creo at the next matching time and run the prompt as an automated Agent turn.",
             properties = JSONObject().apply {
                 put(
                     "action",
@@ -199,7 +199,7 @@ class AetherSelfManagementTool(
         ),
         buildAetherToolDefinition(
             name = "aether_extension_manage",
-            description = "List, install, update, remove, or reload Aether/Pi extension packages, or invoke a registered Pi extension command. Package sources use the npm: format, including npm:<name>@file:<absolute-directory> for a local package.",
+            description = "List, install, update, remove, or reload Creo/Pi extension packages, or invoke a registered Pi extension command. Package sources use the npm: format, including npm:<name>@file:<absolute-directory> for a local package.",
             properties = JSONObject().apply {
                 put(
                     "action",
@@ -246,7 +246,7 @@ class AetherSelfManagementTool(
         ),
         buildAetherToolDefinition(
             name = "aether_developer_manage",
-            description = "Read Aether developer diagnostics such as recent diagnostic events or last crash details. Sensitive values are redacted.",
+            description = "Read Creo developer diagnostics such as recent diagnostic events or last crash details. Sensitive values are redacted.",
             properties = JSONObject().apply {
                 put(
                     "action",
@@ -280,7 +280,7 @@ class AetherSelfManagementTool(
         "aether_scheduled_task_manage" -> executeScheduledTaskManage(argumentsJson)
         "aether_extension_manage" -> executeExtensionManage(argumentsJson)
         "aether_developer_manage" -> executeDeveloperManage(argumentsJson)
-        else -> failure("Unknown Aether self-management tool '$toolName'.")
+        else -> failure("Unknown Creo self-management tool '$toolName'.")
     }
 
     private suspend fun executeConfigGet(argumentsJson: String): String {
@@ -307,7 +307,7 @@ class AetherSelfManagementTool(
             }
         }
         return success(payload) {
-            put("stdout", "Read ${categories.size} Aether configuration categories.")
+            put("stdout", "Read ${categories.size} Creo configuration categories.")
         }
     }
 
@@ -434,7 +434,7 @@ class AetherSelfManagementTool(
             settingsRepository.updateDefaultSelectedSkillIds(updated.defaultSelectedSkillIds)
         }
         return success(JSONObject().put(category, configCategoryJson(category, updated))) {
-            put("stdout", "Updated Aether $category settings.")
+            put("stdout", "Updated Creo $category settings.")
         }
     }
 
@@ -657,7 +657,7 @@ class AetherSelfManagementTool(
                     output.put("last_crash", diagnosticLogger.readLastCrashText().takeLast(maxChars))
                 }
                 success(output) {
-                    put("stdout", "Read Aether diagnostics.")
+                    put("stdout", "Read Creo diagnostics.")
                 }
             }
 

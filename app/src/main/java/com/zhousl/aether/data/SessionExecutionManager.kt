@@ -2017,7 +2017,7 @@ class SessionExecutionManager(
                 runningVerb = "Reading",
                 completedVerb = "Read",
                 subject = formatAetherReasoningCategories(arguments),
-                fallback = "Aether settings",
+                fallback = "Creo settings",
             )
 
             "aether_config_set" -> formatReasoningToolAction(
@@ -2025,7 +2025,7 @@ class SessionExecutionManager(
                 runningVerb = "Updating",
                 completedVerb = "Updated",
                 subject = arguments?.optString("category").orEmpty(),
-                fallback = "Aether settings",
+                fallback = "Creo settings",
             )
 
             "aether_skill_manage" -> formatReasoningToolAction(
@@ -2063,7 +2063,7 @@ class SessionExecutionManager(
                 else -> if (invocation.isRunning) "Checking Phone Use authorization" else "Checked Phone Use authorization"
             }
 
-            "aether_developer_manage" -> if (invocation.isRunning) "Reading Aether diagnostics" else "Read Aether diagnostics"
+            "aether_developer_manage" -> if (invocation.isRunning) "Reading Creo diagnostics" else "Read Creo diagnostics"
             else -> if (invocation.isRunning) {
                 "Using ${invocation.toolName}"
             } else {

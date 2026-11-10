@@ -70,7 +70,7 @@ struct FakeFSItemRecord {
     }
 
     var filename: String {
-        path.isEmpty ? "Aether" : String(path[(path.lastIndex(of: "/") ?? path.startIndex)...].dropFirst())
+        path.isEmpty ? "Creo AI" : String(path[(path.lastIndex(of: "/") ?? path.startIndex)...].dropFirst())
     }
 
     var isDirectory: Bool { path.isEmpty || stat.isDirectory }
@@ -111,7 +111,7 @@ struct FakeFSChangeBatch {
 }
 
 final class FakeFSStore {
-    static let appGroupIdentifier = "group.com.baimoqilin.aether"
+    static let appGroupIdentifier = "group.com.creoai.app"
     static let eventDatabaseName = "file-provider-events.sqlite"
     static let stateDatabaseName = "file-provider-state.sqlite"
 

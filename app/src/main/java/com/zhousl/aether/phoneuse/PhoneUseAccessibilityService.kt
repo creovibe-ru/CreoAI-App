@@ -657,7 +657,7 @@ class PhoneUseAccessibilityService : AccessibilityService() {
         @Volatile private var requestedOverlayState: PhoneUseOverlayState? = null
         val connected = _connected.asStateFlow()
         fun requireConnected(): PhoneUseAccessibilityService = instance
-            ?: error("Enable Aether in Android Accessibility settings, then return to Aether.")
+            ?: error("Enable Creo in Android Accessibility settings, then return to Creo.")
         fun openSettings(context: Context) {
             context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }

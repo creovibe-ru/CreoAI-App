@@ -18,7 +18,7 @@ class SharedProviderModelCatalogClientTest {
         val engine = MockEngine { request ->
             assertEquals("https://models.example/v1/models", request.url.toString())
             assertEquals("Bearer secret", request.headers[HttpHeaders.Authorization])
-            assertEquals("Aether-Test", request.headers[HttpHeaders.UserAgent])
+            assertEquals("Creo-Test", request.headers[HttpHeaders.UserAgent])
             assertEquals("tenant-1", request.headers["X-Tenant"])
             respond(
                 content = """{"data":[{"id":"model-a"},{"id":"MODEL-A"},{"id":"model-b"}]}""",
@@ -331,6 +331,6 @@ private fun customConfig(
     baseUrl = baseUrl,
     authMethod = authMethod,
     modelId = "model-a",
-    userAgent = "Aether-Test",
+    userAgent = "Creo-Test",
     customHeaders = listOf(LlmCustomHeader("X-Tenant", "tenant-1")),
 )

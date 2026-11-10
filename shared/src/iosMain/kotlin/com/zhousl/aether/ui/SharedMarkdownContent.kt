@@ -539,7 +539,7 @@ private suspend fun fetchSharedMarkdownImage(
 ): SharedMarkdownImageBinary {
     val response = sharedMarkdownHttpClient.get(url) {
         header(HttpHeaders.Accept, "image/*,*/*;q=0.8")
-        header(HttpHeaders.UserAgent, "Aether/0.1")
+        header(HttpHeaders.UserAgent, "Creo/0.1")
     }
     if (!response.status.isSuccess()) {
         error(httpErrorWithZero.replace("0", response.status.value.toString()))
@@ -727,7 +727,7 @@ internal fun buildSharedMarkdownBadgeGroupHtml(images: List<SharedMarkdownImageS
         <style>html,body{margin:0;padding:0;background:transparent}.badge-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}img{display:block;width:auto;height:auto;max-width:100%;max-height:32px}</style>
         </head><body><div class="badge-row">$tags</div>
         <script>
-        function postAether(message){if(window.Aether&&window.Aether.postMessage){window.Aether.postMessage(message);}}
+        function postAether(message){if(window.Creo&&window.Creo.postMessage){window.Creo.postMessage(message);}}
         function reportAetherHeight(){const height=Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,1);postAether('height:'+height);}
         document.querySelectorAll('img').forEach(function(image){image.addEventListener('load',reportAetherHeight);image.addEventListener('error',function(){image.style.display='none';reportAetherHeight();});});
         window.addEventListener('load',function(){setTimeout(reportAetherHeight,0);setTimeout(reportAetherHeight,120);});
@@ -741,7 +741,7 @@ internal fun buildSharedMarkdownInlineSvgHtml(svg: String): String = """
     <style>html,body{margin:0;padding:0;background:transparent}.image-shell{display:flex;align-items:center;justify-content:flex-start}.image-shell>svg{display:block;max-width:100%;height:auto;border-radius:12px}</style>
     </head><body><div id="preview-image" class="image-shell">${sanitizeSharedInlineMarkdownSvg(svg)}</div>
     <script>
-    function postAether(message){if(window.Aether&&window.Aether.postMessage){window.Aether.postMessage(message);}}
+    function postAether(message){if(window.Creo&&window.Creo.postMessage){window.Creo.postMessage(message);}}
     function reportAetherHeight(){const height=Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,1);postAether('height:'+height);}
     const image=document.getElementById('preview-image');if(image){image.addEventListener('click',function(){postAether('tap');});}
     window.addEventListener('load',function(){setTimeout(reportAetherHeight,0);setTimeout(reportAetherHeight,120);});
@@ -754,7 +754,7 @@ private fun buildSharedMarkdownImageHtml(imageUrl: String, loadErrorMessage: Str
     <style>html,body{margin:0;padding:0;background:transparent}.image-shell{display:flex;align-items:center;justify-content:flex-start}img{display:block;max-width:100%;height:auto;border-radius:12px}.image-error{color:#6b7280;display:none;font:14px sans-serif;padding:16px}</style>
     </head><body><div class="image-shell"><img id="preview-image" src="${escapeSharedMarkdownHtml(imageUrl)}" alt="" /></div><div id="image-error" class="image-error">${escapeSharedMarkdownHtml(loadErrorMessage)}</div>
     <script>
-    function postAether(message){if(window.Aether&&window.Aether.postMessage){window.Aether.postMessage(message);}}
+    function postAether(message){if(window.Creo&&window.Creo.postMessage){window.Creo.postMessage(message);}}
     function reportAetherHeight(){const height=Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,1);postAether('height:'+height);}
     const image=document.getElementById('preview-image');if(image){image.addEventListener('load',function(){setTimeout(reportAetherHeight,0);setTimeout(reportAetherHeight,120);});image.addEventListener('click',function(){postAether('tap');});image.addEventListener('error',function(){const error=document.getElementById('image-error');if(error){error.style.display='block';}image.style.display='none';reportAetherHeight();});}
     window.addEventListener('load',function(){setTimeout(reportAetherHeight,0);setTimeout(reportAetherHeight,120);});

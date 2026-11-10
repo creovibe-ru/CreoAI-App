@@ -215,7 +215,7 @@ class ProviderConfigSerializationTest {
                     userAgent = "OpenRouterClient/2.0",
                     customHeaders = listOf(
                         LlmCustomHeader("HTTP-Referer", "https://example.com"),
-                        LlmCustomHeader("X-Title", "Aether"),
+                        LlmCustomHeader("X-Title", "Creo"),
                     ),
                 )
             )
@@ -226,7 +226,7 @@ class ProviderConfigSerializationTest {
         assertEquals("HTTP-Referer", config.customHeaders[0].name)
         assertEquals("https://example.com", config.customHeaders[0].value)
         assertEquals("X-Title", config.customHeaders[1].name)
-        assertEquals("Aether", config.customHeaders[1].value)
+        assertEquals("Creo", config.customHeaders[1].value)
         assertEquals("OpenRouterClient/2.0", config.userAgent)
         assertEquals(
             "OpenRouterClient/2.0",

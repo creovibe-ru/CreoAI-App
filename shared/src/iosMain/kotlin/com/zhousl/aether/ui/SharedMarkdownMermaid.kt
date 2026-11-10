@@ -533,7 +533,7 @@ internal fun buildSharedMermaidHtml(
             <script>
                 const renderErrorTitle=${sharedMermaidJsString(renderError)};
                 const invalidSyntaxError=${sharedMermaidJsString(invalidSyntax)};
-                function postAether(message){if(window.Aether&&window.Aether.postMessage){window.Aether.postMessage(message);}}
+                function postAether(message){if(window.Creo&&window.Creo.postMessage){window.Creo.postMessage(message);}}
                 function reportAetherHeight(){const height=Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,1);postAether('height:'+height);}
                 function reportAetherTap(){postAether('tap');}
                 function escapeHtml(value){return String(value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}

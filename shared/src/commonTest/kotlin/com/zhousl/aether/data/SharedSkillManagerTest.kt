@@ -13,7 +13,7 @@ class SharedSkillManagerTest {
 
         assertEquals("Create Extension", metadata.name)
         assertEquals("Create Extensions", skill.actionLabel)
-        assertTrue(metadata.description.contains("customize Aether"))
+        assertTrue(metadata.description.contains("customize Creo"))
         assertTrue(skill.markdown.contains("docs/AETHER_EXTENSIONS.md"))
         assertTrue(skill.markdown.contains("aether.baimoqilin.com/docs/extensions/overview.md"))
         assertTrue(skill.markdown.contains("install_package"))

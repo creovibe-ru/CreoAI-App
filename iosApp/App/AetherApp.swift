@@ -5,7 +5,7 @@ import AetherShared
 import FileProvider
 
 extension Notification.Name {
-    static let openAlpineFileManager = Notification.Name("Aether.OpenAlpineFileManager")
+    static let openAlpineFileManager = Notification.Name("Creo.OpenAlpineFileManager")
 }
 
 private final class AetherAppDelegate: NSObject, UIApplicationDelegate {
@@ -16,17 +16,17 @@ private final class AetherAppDelegate: NSObject, UIApplicationDelegate {
         IosNativeChatHost.shared.factory = NativeChatFactory.shared
         IosAnalytics.shared.setListener(listener: AetherAnalytics.shared)
         AetherRuntimeHost.shared.registerBackgroundExecution()
-        let domain = NSFileProviderDomain(identifier: NSFileProviderDomainIdentifier("com.baimoqilin.aether"), displayName: "Aether")
+        let domain = NSFileProviderDomain(identifier: NSFileProviderDomainIdentifier("com.creoai.app"), displayName: "Creo AI")
         NSFileProviderManager.add(domain) { error in
             if let error = error as NSError? {
                 NSLog(
-                    "Aether File Provider registration failed (%@ %ld): %@",
+                    "Creo File Provider registration failed (%@ %ld): %@",
                     error.domain,
                     error.code,
                     error.localizedDescription
                 )
             } else {
-                NSLog("Aether File Provider domain registered")
+                NSLog("Creo File Provider domain registered")
             }
         }
         AetherRuntimeHost.shared.refreshApkRepositoriesForCurrentNetwork()
@@ -394,7 +394,7 @@ private struct NativeScheduledTask: Codable, Identifiable {
 private final class NativeScheduledTaskStore: ObservableObject {
     static let shared = NativeScheduledTaskStore()
     @Published var tasks: [NativeScheduledTask] = []
-    private let storageKey = "Aether.ScheduledTasks.v1"
+    private let storageKey = "Creo.ScheduledTasks.v1"
     private init() {
         if let data = UserDefaults.standard.data(forKey: storageKey), let saved = try? JSONDecoder().decode([NativeScheduledTask].self, from: data) { tasks = saved }
     }
@@ -447,7 +447,7 @@ private struct NativeScheduledTasksView: View {
                     }.onDelete(perform: store.delete)
                     if store.tasks.isEmpty { Text(model.text("No scheduled tasks", "暂无定时任务")).foregroundStyle(.secondary) }
                 } footer: {
-                    Text(model.text("Tasks run while Aether is active. Overdue tasks run when you reopen the app; iOS controls background execution.", "任务在 Aether 活跃时执行；重新打开应用时补跑到期任务。后台执行由 iOS 管理。"))
+                    Text(model.text("Tasks run while Creo is active. Overdue tasks run when you reopen the app; iOS controls background execution.", "任务在 Creo 活跃时执行；重新打开应用时补跑到期任务。后台执行由 iOS 管理。"))
                 }
             }
             .navigationTitle(model.text("Scheduled Tasks", "定时任务"))

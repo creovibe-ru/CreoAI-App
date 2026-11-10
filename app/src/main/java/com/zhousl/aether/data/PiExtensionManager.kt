@@ -325,7 +325,7 @@ class PiExtensionManager(
             val request = Request.Builder()
                 .url(PiPackagesUrl)
                 .header("Accept", "text/html")
-                .header("User-Agent", "Aether-Android")
+                .header("User-Agent", "Creo-Android")
                 .build()
             httpClient.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
@@ -347,7 +347,7 @@ class PiExtensionManager(
             val request = Request.Builder()
                 .url(entry.packageUrl)
                 .header("Accept", "text/html")
-                .header("User-Agent", "Aether-Android")
+                .header("User-Agent", "Creo-Android")
                 .build()
             httpClient.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
@@ -658,7 +658,7 @@ class PiExtensionManager(
                 )
                 val installed = importedExtension(transaction.destination, "aether")
                     ?: error(
-                        "The imported source did not contain a loadable Aether or Pi extension."
+                        "The imported source did not contain a loadable Creo or Pi extension."
                     )
                 transaction.commit()
                 alpineRuntime.clearPreinstalledExtensionRemoved(transaction.destination.name)

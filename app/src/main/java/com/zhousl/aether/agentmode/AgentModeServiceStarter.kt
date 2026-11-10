@@ -30,11 +30,11 @@ internal object AgentModeServiceProtocol {
 
 /**
  * Entry point of the privileged Phone Use process, run through `app_process` as shell (Shizuku)
- * or root with Aether's APK on the class path.
+ * or root with Creo's APK on the class path.
  *
  * This replaces Shizuku's UserService starter, which builds the service's Application through
- * LoadedApk.makeApplication(). That looks Aether up in the starter process's own Android user,
- * user 0, and aborts when Aether is installed only on a secondary user. Here the context is created
+ * LoadedApk.makeApplication(). That looks Creo up in the starter process's own Android user,
+ * user 0, and aborts when Creo is installed only on a secondary user. Here the context is created
  * directly for the launching user, and the binder goes back to that user by broadcast.
  */
 @Keep

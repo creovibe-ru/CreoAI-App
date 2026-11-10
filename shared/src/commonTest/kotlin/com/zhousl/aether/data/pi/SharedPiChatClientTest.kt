@@ -399,7 +399,7 @@ class SharedPiChatClientTest {
         )
 
         assertEquals("Thinking", statuses[0]?.text)
-        assertEquals("Aether is working on this turn.", statuses[0]?.detail)
+        assertEquals("Creo is working on this turn.", statuses[0]?.detail)
         assertEquals("Agent engine error", statuses[1]?.text)
         assertEquals("provider disconnected", statuses[1]?.detail)
         assertNull(statuses[2])

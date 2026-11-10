@@ -81,7 +81,7 @@ class AetherApplication : Application() {
                 errorTrackingConfig.inAppIncludes.addAll(
                     listOf(
                         "com.zhousl.aether",
-                        "com.baimoqilin.aether",
+                        "com.creoai.app",
                     ),
                 )
             }

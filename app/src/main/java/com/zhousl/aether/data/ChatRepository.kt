@@ -1139,7 +1139,7 @@ private fun corruptedChatStateSession(
         ChatMessage(
             id = "agent-corrupt-chat-state-${rawValue.hashCode()}",
             author = MessageAuthor.Agent,
-            text = "Aether could not read the stored chat history (${throwable.javaClass.simpleName}). " +
+            text = "Creo could not read the stored chat history (${throwable.javaClass.simpleName}). " +
                 "The app is showing this recovery placeholder instead of hiding the conversation list.",
             createdAtMillis = 0L,
             providerPayloadJson = rawValue,

@@ -851,7 +851,7 @@ private val ComposerShape = RoundedCornerShape(26.dp)
 private val ComposerFocusedShape = RoundedCornerShape(28.dp)
 private val ComposerPlusMenuMaxHeight = 372.dp
 private val ControlShadow = Color(0x14000000)
-private val ComposerPurple = Color(0xFF9B5CFF)
+private val ComposerGreen = Color(0xFF22C55E)
 private val SharedConversationMotionEasing = CubicBezierEasing(0.22f, 0.84f, 0.18f, 1f)
 private val SharedBranchBlurInEasing = CubicBezierEasing(0.4f, 0f, 0.2f, 1f)
 private val SharedBranchBlurOutEasing = CubicBezierEasing(0.16f, 1f, 0.3f, 1f)
@@ -866,7 +866,7 @@ private const val SharedContextWindowTokens = 128_000L
 private const val SharedAutoCompactionReserveTokens = 16_384L
 
 private const val SharedInitialStreamingStatusText = "Thinking"
-private const val SharedInitialStreamingStatusDetail = "Aether is working on this turn."
+private const val SharedInitialStreamingStatusDetail = "Creo is working on this turn."
 private const val SharedProviderValidationErrorText =
     "The selected provider is not fully configured."
 private const val SharedInlineImageAttachmentMaxBytes = 5L * 1024L * 1024L
@@ -1366,7 +1366,7 @@ fun IosComposeApp(
         fun ensureBackgroundExecution(target: SharedSessionUiState) {
             if (backgroundLeases[target.id]?.isActive == true) return
             backgroundLeases.remove(target.id)?.end()
-            backgroundLeases[target.id] = backgroundExecutionManager.begin("Aether Agent") {
+            backgroundLeases[target.id] = backgroundExecutionManager.begin("Creo Agent") {
                 target.job?.cancel()
                 target.job = null
                 appScope.launch {
@@ -1967,7 +1967,7 @@ fun IosComposeApp(
             val config = resolveProviderForModel(requestedKey, fallbackModelKey)
             val shouldGenerateTitle = target.isDraft
             if (target.isDraft) {
-                target.id = "aether-session-${platformRandomUuid()}"
+                target.id = "creo-session-${platformRandomUuid()}"
                 target.isDraft = false
                 target.hasCustomTitle = true
                 sessionStates[target.id] = target
@@ -2796,7 +2796,7 @@ fun IosComposeApp(
                         }
                         handleSharedExtensionHostCall(mapped, nested)
                     }
-                    else -> error("Unsupported Aether extension host method on this platform: " + method)
+                    else -> error("Unsupported Creo extension host method on this platform: " + method)
                 }
 
         val extensionManager = remember(extensionBridgeClient) {
@@ -3510,7 +3510,7 @@ fun IosComposeApp(
                                 historyStore?.setCurrentSession(sessionId)
                                 val data = manager.exportJson().encodeToByteArray()
                                 platformServices.exportFile(
-                                    "aether-backup.json",
+                                    "creo-backup.json",
                                     "application/json",
                                     data,
                                 )
@@ -3588,7 +3588,7 @@ fun IosComposeApp(
                                     settings = sharedAppSettings,
                                 )
                                 platformServices.exportFile(
-                                    "aether-diagnostics.txt",
+                                    "creo-diagnostics.txt",
                                     "text/plain",
                                     text.encodeToByteArray(),
                                 )
@@ -4366,7 +4366,7 @@ private suspend fun buildSharedDiagnosticLogText(
     val diagnosticEvents = SharedDiagnosticLogger.readEventsText()
     val lastCrash = SharedDiagnosticLogger.readLastCrashText()
     return buildString {
-        appendLine("Aether diagnostic log")
+        appendLine("Creo diagnostic log")
         appendLine("generatedAtMillis=${platformCurrentTimeMillis()}")
         appendLine("versionName=$appVersion")
         appendLine("screen=${route.name}")
@@ -4602,7 +4602,7 @@ private fun String.sanitizeSharedExportFileName(): String = trim()
     .replace(Regex("[\\\\/:*?\"<>|]+"), "-")
     .trim('.', ' ', '-')
     .take(80)
-    .ifBlank { "aether-session" }
+    .ifBlank { "creo-session" }
 
 private val Base64Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
@@ -7239,7 +7239,7 @@ private fun SharedSurfaceNotice(
 @Composable
 private fun SharedComposerPauseButton(onClick: () -> Unit) {
     Box(
-        modifier = Modifier.size(38.dp).clip(CircleShape).background(ComposerPurple).clickable(onClick = onClick),
+        modifier = Modifier.size(38.dp).clip(CircleShape).background(ComposerGreen).clickable(onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
         Box(
@@ -7259,7 +7259,7 @@ private fun SharedComposerSubmitButton(
     val enabled = hasDraft && canSendDraft
     Box(
         modifier = Modifier.size(38.dp).clip(CircleShape)
-            .background(if (enabled) ComposerPurple else AetherSurfaceHigher)
+            .background(if (enabled) ComposerGreen else AetherSurfaceHigher)
             .clickable(enabled = enabled, onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
@@ -7974,9 +7974,9 @@ internal fun sharedReasoningToolStatus(tool: SharedChatToolInvocation): String {
             (args?.get("categories") as? JsonArray)
                 ?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull?.trim()?.takeIf(String::isNotBlank) }
                 ?.joinToString(", ").orEmpty(),
-            "Aether settings",
+            "Creo settings",
         )
-        "aether_config_set" -> action("Updating", "Updated", args?.string("category").orEmpty(), "Aether settings")
+        "aether_config_set" -> action("Updating", "Updated", args?.string("category").orEmpty(), "Creo settings")
         "aether_skill_manage" -> when (args?.string("action").orEmpty().lowercase()) {
             "install_remote" -> action("Installing", "Installed", args?.string("url").orEmpty(), "Agent Skills")
             "remove" -> action("Removing", "Removed", args?.string("skill_id").orEmpty().ifBlank { args?.string("skillId").orEmpty() }, "Agent Skills")
@@ -8001,7 +8001,7 @@ internal fun sharedReasoningToolStatus(tool: SharedChatToolInvocation): String {
             "refresh_displays" -> if (running) "Refreshing Agent Mode displays" else "Refreshed Agent Mode displays"
             else -> if (running) "Checking Agent Mode authorization" else "Checked Agent Mode authorization"
         }
-        "aether_developer_manage" -> if (running) "Reading Aether diagnostics" else "Read Aether diagnostics"
+        "aether_developer_manage" -> if (running) "Reading Creo diagnostics" else "Read Creo diagnostics"
         else -> if (running) "Using ${tool.name}" else "Used ${tool.name}"
     }
 }
@@ -8754,7 +8754,7 @@ internal fun buildNativeSettingsSnapshot(
             })
         }
     })
-    // Script extension settings are schema driven and remain available to SwiftUI. Aether Native
+    // Script extension settings are schema driven and remain available to SwiftUI. Creo Native
     // surfaces/components are intentionally not exported because they are platform UI code.
     put("extensionSettings", buildJsonArray {
         extensionSnapshot.settings.sortedBy { it.order }.forEach { page ->

@@ -214,7 +214,7 @@ class SharedPiChatClient(
             put("termux_workspace_directory", workspaceDirectory)
             put("runtime", "alpine")
             put("platform", "ios")
-            // Aether owns this workspace; allow Pi to discover project Skills.
+            // Creo owns this workspace; allow Pi to discover project Skills.
             put("workspace_trusted", true)
             put("chrome_enabled", false)
             put("skill_paths", buildJsonArray {
@@ -243,7 +243,7 @@ class SharedPiChatClient(
         onStreamingStatus(
             SharedPiStreamingStatus(
                 text = "Thinking",
-                detail = "Aether is working on this turn.",
+                detail = "Creo is working on this turn.",
             )
         )
         val eventHandler: suspend (String, JsonObject) -> Unit = { event, eventPayload ->

@@ -46,7 +46,7 @@ internal fun sharedBrowserToolDefinitions(enabled: Boolean): JsonArray =
                 put("name", BrowserToolName)
                 put(
                     "description",
-                    "Control Aether's browser. Prefer CSS selectors and DOM-reading actions; use normalized 0..1000 coordinates only as a fallback.",
+                    "Control Creo's browser. Prefer CSS selectors and DOM-reading actions; use normalized 0..1000 coordinates only as a fallback.",
                 )
                 put("execution_mode", "sequential")
                 put("parameters", buildJsonObject {

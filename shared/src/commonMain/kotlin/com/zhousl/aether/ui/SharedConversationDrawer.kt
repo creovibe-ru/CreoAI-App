@@ -225,7 +225,7 @@ fun AetherConversationDrawer(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            text = "Aether",
+                            text = "Creo AI",
                             style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Normal),
                             color = AetherOnSurface,
                             modifier = Modifier.padding(start = 6.dp),
@@ -300,7 +300,7 @@ fun AetherConversationDrawer(
                     .padding(end = 18.dp, bottom = 18.dp)
                     .shadow(18.dp, RoundedCornerShape(999.dp), ambientColor = AetherScrim, spotColor = AetherScrim)
                     .clip(RoundedCornerShape(999.dp))
-                    .background(Color(0xFFAD7BF9))
+                    .background(Color(0xFF22C55E))
                     .clickable {
                         dismissSearch()
                         onNewChat()

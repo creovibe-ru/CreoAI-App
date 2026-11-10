@@ -1017,7 +1017,7 @@ internal fun buildSharedMarkdownTextHtml(
         <body>
           <div class="aether-text">$content</div>
           <script>
-            function postAether(message){if(window.Aether&&window.Aether.postMessage){window.Aether.postMessage(message);}}
+            function postAether(message){if(window.Creo&&window.Creo.postMessage){window.Creo.postMessage(message);}}
             function reportAetherHeight(){var h=Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,$SharedMarkdownTextMinHeightDp);postAether('height:'+h);}
             function bindAetherLinks(){document.querySelectorAll('a[href]').forEach(function(a){a.onclick=function(e){e.preventDefault();var href=a.getAttribute('href');if(href){postAether('link:'+href);}return false;};});}
             function renderAetherMath(){bindAetherLinks();try{if(window.renderMathInElement){window.renderMathInElement(document.body,{delimiters:$MarkdownMathDelimitersJson,throwOnError:false,strict:'ignore',ignoredTags:['script','noscript','style','textarea','pre','code','option']});}}catch(e){}finally{bindAetherLinks();setTimeout(reportAetherHeight,0);setTimeout(reportAetherHeight,120);setTimeout(reportAetherHeight,360);}}

@@ -51,7 +51,7 @@ function isWithin(root: string, candidate: string): boolean {
   );
 }
 
-/** Find the package root for a bundled/imported entry without crossing the Aether root. */
+/** Find the package root for a bundled/imported entry without crossing the Creo root. */
 export function packageRootForExtensionPath(
   extensionPath: string,
   extensionRoot: string,

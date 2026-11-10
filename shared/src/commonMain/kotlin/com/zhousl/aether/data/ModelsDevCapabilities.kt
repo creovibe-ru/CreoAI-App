@@ -9,7 +9,7 @@ import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.doubleOrNull
 
-/** Thinking levels understood by Aether and Pi, in ascending order. */
+/** Thinking levels understood by Creo and Pi, in ascending order. */
 val ModelsDevThinkingLevels: List<String> = listOf("off", "minimal", "low", "medium", "high", "xhigh", "max")
 
 fun lowestAvailableReasoningEffort(

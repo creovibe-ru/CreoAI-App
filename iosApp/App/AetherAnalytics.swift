@@ -19,7 +19,7 @@ final class AetherAnalytics: NSObject, IosAnalyticsListener {
         config.sessionReplay = false
         config.captureElementInteractions = false
         config.errorTrackingConfig.autoCapture = true
-        config.errorTrackingConfig.inAppIncludes += ["Aether", "AetherShared", "com.baimoqilin.aether"]
+        config.errorTrackingConfig.inAppIncludes += ["Aether", "AetherShared", "com.creoai.app"]
         #if DEBUG
         config.debug = true
         #endif

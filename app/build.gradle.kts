@@ -42,7 +42,7 @@ val appVersionName = providers.gradleProperty("aether.versionName")
     .orNull
     ?.trim()
     ?.takeIf { it.isNotEmpty() }
-    ?: "2.1.7"
+    ?: "1.0.0"
 val piBridgeProjectDir = rootProject.layout.projectDirectory.dir("pi-bridge")
 val piBridgeGeneratedAssetsDir = layout.buildDirectory.dir("generated/assets/piBridge")
 val preinstalledExtensionsDir = rootProject.layout.projectDirectory.dir("extensions")
@@ -109,12 +109,12 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.baimoqilin.aether"
+        applicationId = "com.creoai.app"
         minSdk = 26
         // Alpine/Termux-style local runtimes install executable ELF files into app-private
         // storage. Android blocks execve() from that location for targetSdk >= 29.
         targetSdk = 28
-        versionCode = 11
+        versionCode = 100
         versionName = appVersionName
 
         ndk {
@@ -162,7 +162,7 @@ android {
             initWith(getByName("debug"))
             applicationIdSuffix = ".showcase"
             matchingFallbacks += listOf("debug")
-            resValue("string", "showcase_app_name", "Aether Showcase")
+            resValue("string", "showcase_app_name", "Creo AI Showcase")
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
             manifestPlaceholders["appRoundIcon"] = "@mipmap/ic_launcher_round"
             manifestPlaceholders["appLabel"] = "@string/showcase_app_name"
@@ -185,7 +185,7 @@ android {
             initWith(getByName("release"))
             applicationIdSuffix = ".nightly"
             matchingFallbacks += listOf("release")
-            resValue("string", "nightly_app_name", "Aether Nightly")
+            resValue("string", "nightly_app_name", "Creo AI Nightly")
             buildConfigField("String", "UPDATE_CHANNEL", "\"nightly\"")
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_nightly"
             manifestPlaceholders["appRoundIcon"] = "@mipmap/ic_launcher_nightly_round"

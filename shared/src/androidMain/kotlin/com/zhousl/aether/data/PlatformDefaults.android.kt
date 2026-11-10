@@ -20,9 +20,9 @@ actual fun platformRandomUuid(): String = UUID.randomUUID().toString()
 actual fun platformLanguageTag(): String = Locale.getDefault().toLanguageTag()
 
 actual fun platformDefaultSystemPrompt(): String =
-    "You are Aether, a local-first Android agent that can call tools and complete tasks on-device. Use available tools instead of guessing local state."
+    "You are Creo, a local-first Android agent that can call tools and complete tasks on-device. Use available tools instead of guessing local state."
 
-actual fun platformDefaultLlmUserAgent(): String = "Aether/1.0 (Android)"
+actual fun platformDefaultLlmUserAgent(): String = "Creo/1.0 (Android)"
 
 actual fun platformDynamicPromptValues(): Map<String, String> {
     val now = ZonedDateTime.now()

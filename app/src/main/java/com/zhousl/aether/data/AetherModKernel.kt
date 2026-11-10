@@ -46,7 +46,7 @@ class AetherModServiceRegistry {
         handler: AetherModServiceHandler,
     ): () -> Unit {
         val normalizedId = id.trim()
-        require(normalizedId.isNotBlank()) { "Aether mod services require an id." }
+        require(normalizedId.isNotBlank()) { "Creo mod services require an id." }
         val registration = Registration(
             sequence = sequence.incrementAndGet(),
             descriptor = AetherModServiceDescriptor(
@@ -95,11 +95,11 @@ class AetherModServiceRegistry {
     ): JSONObject {
         val registration = synchronized(lock) {
             activeRegistration(registrations[id.trim()].orEmpty())
-        } ?: error("Unknown Aether mod service: $id")
+        } ?: error("Unknown Creo mod service: $id")
         require(
             registration.descriptor.methods.any { it.name == method }
         ) {
-            "Unknown method $method on Aether mod service ${registration.descriptor.id}."
+            "Unknown method $method on Creo mod service ${registration.descriptor.id}."
         }
         return registration.handler.invoke(method, args)
     }
@@ -114,7 +114,7 @@ class AetherModServiceRegistry {
     )
 
     fun describeJson(id: String): JSONObject =
-        describe(id)?.toJson() ?: error("Unknown Aether mod service: $id")
+        describe(id)?.toJson() ?: error("Unknown Creo mod service: $id")
 
     private fun activeRegistration(
         entries: List<Registration>,
@@ -157,7 +157,7 @@ class AetherModOperationRegistry {
     ): () -> Unit {
         val normalizedOperation = operation.trim()
         require(normalizedOperation.isNotBlank()) {
-            "Aether operation interceptors require an operation name."
+            "Creo operation interceptors require an operation name."
         }
         val registration = Registration(
             sequence = sequence.incrementAndGet(),

@@ -333,7 +333,7 @@ class PhoneUseAccessibilityServiceTest {
         val app = appWindow(node, 10, AccessibilityWindowInfo.TYPE_APPLICATION, false)
         val overlayNode = AccessibilityNodeInfo.obtain().apply { text = "private steer draft"; packageName = service.packageName }
         val overlay = appWindow(overlayNode, 20, AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY, true)
-        shadowOf(overlay).setTitle("Aether Phone Use commentary")
+        shadowOf(overlay).setTitle("Creo Phone Use commentary")
         shadowOf(service).setWindowsOnDisplay(0, listOf(overlay, app))
         val observed = service.observe(0, 720, 1280)
         assertEquals(1, observed.getJSONArray("windows").length())
@@ -346,7 +346,7 @@ class PhoneUseAccessibilityServiceTest {
     @Test fun emptyWindowListNeverFallsBackToTheSteerDraft() {
         val overlayNode = AccessibilityNodeInfo.obtain().apply { text = "private steer draft"; packageName = service.packageName }
         val overlay = appWindow(overlayNode, 20, AccessibilityWindowInfo.TYPE_ACCESSIBILITY_OVERLAY, true)
-        shadowOf(overlay).setTitle("Aether Phone Use commentary")
+        shadowOf(overlay).setTitle("Creo Phone Use commentary")
         shadowOf(service).setWindowsOnDisplay(0, emptyList())
         shadowOf(service).setRootInActiveWindow(overlayNode)
         assertEquals(0, service.observe(0, 720, 1280).getInt("node_count"))

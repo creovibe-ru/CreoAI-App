@@ -16,7 +16,7 @@ class AgentExtensionsRepository(
     val extensionState: Flow<AgentExtensionsState> = context.agentExtensionsDataStore.data.map { preferences ->
         AgentExtensionsState(
             installedSkills = parseInstalledSkills(preferences[INSTALLED_SKILLS_JSON].orEmpty()),
-            // MCP is no longer an Aether persistence/runtime feature. Keep the
+            // MCP is no longer an Creo persistence/runtime feature. Keep the
             // state slot empty for callers compiled against the old UI model.
             mcpServers = emptyList(),
         )

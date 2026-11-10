@@ -192,7 +192,7 @@ const INDEX_FILE_NAMES = [
 
 const emptyTransport: AetherExtensionTransport = {
   async requestHost() {
-    throw new Error("The Aether app host is not connected.");
+    throw new Error("The Creo app host is not connected.");
   },
   invalidate() {},
   notify() {},
@@ -399,7 +399,7 @@ function manifestApiCompatibilityError(
     }
     return configured === AETHER_API_VERSION
       ? undefined
-      : `Requires Aether Script API ${configured}, but this runtime provides ${AETHER_API_VERSION}.`;
+      : `Requires Creo Script API ${configured}, but this runtime provides ${AETHER_API_VERSION}.`;
   }
   if (!configured || typeof configured !== "object" || Array.isArray(configured)) {
     return "aether.api must be a positive integer or an API range object.";
@@ -431,14 +431,14 @@ function manifestApiCompatibilityError(
     return "aether.api.min cannot be greater than aether.api.max.";
   }
   if (minimum !== undefined && AETHER_API_VERSION < Number(minimum)) {
-    return `Requires Aether Script API ${minimum} or newer, but this runtime provides ${AETHER_API_VERSION}.`;
+    return `Requires Creo Script API ${minimum} or newer, but this runtime provides ${AETHER_API_VERSION}.`;
   }
   if (
     maximum !== undefined &&
     AETHER_API_VERSION > Number(maximum) &&
     !allowNewer
   ) {
-    return `Supports Aether Script API through ${maximum}, but this runtime provides ${AETHER_API_VERSION}.`;
+    return `Supports Creo Script API through ${maximum}, but this runtime provides ${AETHER_API_VERSION}.`;
   }
   return undefined;
 }
@@ -788,7 +788,7 @@ function createApi(
     messages: {
       append(type, payload = {}, text = "") {
         const normalizedType = type.trim();
-        if (!normalizedType) throw new Error("Aether custom messages require a type.");
+        if (!normalizedType) throw new Error("Creo custom messages require a type.");
         return transport.requestHost("app.appendCustomMessage", {
           type: normalizedType,
           payload: cloneJson(payload),
@@ -816,7 +816,7 @@ function createApi(
       const definition = normalizeSurfaceDefinition(rawDefinition) as AetherComponentDefinition;
       const normalizedTarget = target.trim();
       if (!normalizedTarget) {
-        throw new Error("Aether extension components require a target.");
+        throw new Error("Creo extension components require a target.");
       }
       const localId = definition.id?.trim() ||
         `${normalizedTarget}-${runtimeState.components.size + 1}`;
@@ -844,10 +844,10 @@ function createApi(
     },
     registerSettings(definition) {
       const localId = definition.id.trim();
-      if (!localId) throw new Error("Aether extension settings require an id.");
-      if (!definition.title.trim()) throw new Error("Aether extension settings require a title.");
+      if (!localId) throw new Error("Creo extension settings require an id.");
+      if (!definition.title.trim()) throw new Error("Creo extension settings require a title.");
       if (!Array.isArray(definition.sections) && !Array.isArray(definition.categories)) {
-        throw new Error("Aether extension settings require sections, categories, or both.");
+        throw new Error("Creo extension settings require sections, categories, or both.");
       }
       const seenSettingIds = new Set<string>();
       const normalizeSections = (sections: AetherSettingsSection[]) => sections.map((section) => ({
@@ -858,10 +858,10 @@ function createApi(
           const label = setting.label?.trim() ?? setting.title?.trim() ?? "";
           const labelFree = type === "divider" || type === "spacer" || type === "item-card" || type === "card" || type === "empty-state" || type === "choice" || type === "radio" || type === "action-row" || type === "chips" || type === "detail-line" || type === "key-value" || type === "pill" || type === "badge" || type === "result-card" || type === "callout";
           if (!id || (!label && !labelFree)) {
-            throw new Error("Aether extension settings require ids and visible controls require labels.");
+            throw new Error("Creo extension settings require ids and visible controls require labels.");
           }
           if (seenSettingIds.has(id)) {
-            throw new Error(`Aether extension setting ids must be unique: ${id}.`);
+            throw new Error(`Creo extension setting ids must be unique: ${id}.`);
           }
           seenSettingIds.add(id);
           const storage = extensionStorage(extension.id);
@@ -883,7 +883,7 @@ function createApi(
           ? definition.categories.map((category) => {
             const id = category.id.trim();
             if (!id || !category.title.trim() || !Array.isArray(category.sections)) {
-              throw new Error("Aether extension settings categories require ids, titles, and sections.");
+              throw new Error("Creo extension settings categories require ids, titles, and sections.");
             }
             return { ...category, id, title: category.title.trim(), sections: normalizeSections(category.sections) };
           })
@@ -938,8 +938,8 @@ function createApi(
     },
     registerComposerMenuItem(definition) {
       const localId = definition.id.trim();
-      if (!localId) throw new Error("Aether composer menu items require an id.");
-      if (!definition.title.trim()) throw new Error("Aether composer menu items require a title.");
+      if (!localId) throw new Error("Creo composer menu items require an id.");
+      if (!definition.title.trim()) throw new Error("Creo composer menu items require a title.");
       const id = scopedId(extension.id, localId);
       runtimeState.composerMenuItems.set(id, {
         id,
@@ -956,8 +956,8 @@ function createApi(
     },
     registerMessageType(definition) {
       const type = definition.type.trim();
-      if (!type) throw new Error("Aether message types require a type.");
-      if (!definition.render) throw new Error("Aether message types require a renderer.");
+      if (!type) throw new Error("Creo message types require a type.");
+      if (!definition.render) throw new Error("Creo message types require a renderer.");
       const id = scopedId(extension.id, type);
       runtimeState.messageTypes.set(id, {
         id,
@@ -979,9 +979,9 @@ function createApi(
       const normalizedToolName = toolName.trim();
       const normalizedRunningTitle = runningTitle.trim();
       const normalizedCompletedTitle = completedTitle.trim();
-      if (!normalizedToolName) throw new Error("Aether tool titles require a tool name.");
-      if (!normalizedRunningTitle) throw new Error("Aether tool titles require a running title.");
-      if (!normalizedCompletedTitle) throw new Error("Aether tool titles require a completed title.");
+      if (!normalizedToolName) throw new Error("Creo tool titles require a tool name.");
+      if (!normalizedRunningTitle) throw new Error("Creo tool titles require a running title.");
+      if (!normalizedCompletedTitle) throw new Error("Creo tool titles require a completed title.");
       const normalizedPriority = Number.isFinite(priority)
         ? Math.trunc(Number(priority))
         : 100;
@@ -1005,7 +1005,7 @@ function createApi(
     },
     registerAction(id, handler) {
       const localId = id.trim();
-      if (!localId) throw new Error("Aether extension actions require an id.");
+      if (!localId) throw new Error("Creo extension actions require an id.");
       const idScoped = scopedId(extension.id, localId);
       runtimeState.actions.set(idScoped, { extension, localId, handler });
       return () => {
@@ -1014,13 +1014,13 @@ function createApi(
     },
     on(event, handler) {
       const eventName = event.trim();
-      if (!eventName) throw new Error("Aether extension event handlers require an event name.");
+      if (!eventName) throw new Error("Creo extension event handlers require an event name.");
       return createApiEventRegistration(runtimeState, extension, eventName, handler);
     },
     intercept(operation, handler) {
       const operationName = operation.trim();
       if (!operationName) {
-        throw new Error("Aether operation interceptors require an operation name.");
+        throw new Error("Creo operation interceptors require an operation name.");
       }
       return createApiEventRegistration(
         runtimeState,
@@ -1470,7 +1470,7 @@ async function invokeAetherAppExtensionActionUnlocked(
   const scopedActionId = scopedId(extensionId, actionId);
   const id = runtime.actions.has(scopedActionId) ? scopedActionId : actionId;
   const action = runtime.actions.get(id);
-  if (!action) throw new Error(`Unknown Aether extension action: ${actionId}`);
+  if (!action) throw new Error(`Unknown Creo extension action: ${actionId}`);
   try {
     const result = await action.handler(
       cloneJson(payload),

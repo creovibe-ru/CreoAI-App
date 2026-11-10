@@ -431,7 +431,7 @@ class AetherAppExtensionManager(
                 }
                 val result = runCatching {
                     val handler = hostHandler
-                        ?: error("The Aether UI host is not attached.")
+                        ?: error("The Creo UI host is not attached.")
                     handler(method, args)
                 }
                 bridge.sendAetherHostResult(
@@ -481,7 +481,7 @@ private fun JSONArray?.toStringList(): List<String> {
 
 internal fun JSONObject.extensionReloadError(): String {
     if (optBoolean("reloaded", true)) return ""
-    val errors = optJSONArray("errors") ?: return "Aether extensions rejected the reload."
+    val errors = optJSONArray("errors") ?: return "Creo extensions rejected the reload."
     return buildList {
         for (index in 0 until errors.length()) {
             errors.optJSONObject(index)
@@ -490,7 +490,7 @@ internal fun JSONObject.extensionReloadError(): String {
                 ?.let(::add)
         }
     }.distinct().take(3).joinToString("; ")
-        .ifBlank { "Aether extensions rejected the reload." }
+        .ifBlank { "Creo extensions rejected the reload." }
 }
 
 internal fun parseAetherAppExtensionSnapshot(json: JSONObject?): AetherAppExtensionSnapshot {

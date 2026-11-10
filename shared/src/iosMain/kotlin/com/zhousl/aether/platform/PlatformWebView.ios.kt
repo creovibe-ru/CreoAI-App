@@ -38,11 +38,11 @@ actual fun PlatformWebView(
                 val userContent = WKUserContentController().apply {
                     addScriptMessageHandler(
                         AetherWebMessageHandler { message -> currentOnMessage(message) },
-                        name = "Aether",
+                        name = "Creo",
                     )
                     addUserScript(
                         WKUserScript(
-                            source = "window.Aether={postMessage:function(message){window.webkit.messageHandlers.Aether.postMessage(message);}};",
+                            source = "window.Creo={postMessage:function(message){window.webkit.messageHandlers.Creo.postMessage(message);}};",
                             injectionTime =
                                 WKUserScriptInjectionTime.WKUserScriptInjectionTimeAtDocumentStart,
                             forMainFrameOnly = false,

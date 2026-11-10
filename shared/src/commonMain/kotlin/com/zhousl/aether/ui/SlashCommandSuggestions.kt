@@ -6,7 +6,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 
-/** The only Pi built-in command exposed by Aether's non-TUI composer. */
+/** The only Pi built-in command exposed by Creo's non-TUI composer. */
 val PiBuiltinSlashCommands = listOf(
     "compact" to "Manually compact the session context",
 )

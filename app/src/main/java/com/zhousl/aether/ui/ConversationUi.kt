@@ -235,7 +235,7 @@ private const val ComposerPopupActionDelayMillis = 240L
 private const val MinimumWallClockMillis = 946_684_800_000L
 private val ChatGptControlShadow = Color(0x14000000)
 private val ChatGptComposerShadow = Color(0x18000000)
-private val ChatGptPurple = Color(0xFF9B5CFF)
+private val ChatGptGreen = Color(0xFF22C55E)
 private val ChatGptMotionEasing = CubicBezierEasing(0.22f, 0.84f, 0.18f, 1f)
 
 internal enum class PendingGenerationIndicator {
@@ -3055,7 +3055,7 @@ private fun ComposerPauseButton(
         modifier = Modifier
             .size(38.dp)
             .clip(CircleShape)
-            .background(ChatGptPurple)
+            .background(ChatGptGreen)
             .clickable(onClick = onClick),
         contentAlignment = Alignment.Center,
     ) {
@@ -3092,7 +3092,7 @@ private fun ComposerSubmitButton(
 ) {
     val enabled = hasDraft && canSendDraft
     val buttonColor = if (enabled) {
-        ChatGptPurple
+        ChatGptGreen
     } else {
         AetherSurfaceHigher
     }

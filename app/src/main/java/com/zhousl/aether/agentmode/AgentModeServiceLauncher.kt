@@ -42,8 +42,8 @@ internal class AgentModeServiceHandle(
  */
 internal object AgentModeServiceLauncher {
     /**
-     * Held for the lifetime of the Aether process. The service links to its death, so the
-     * privileged process exits together with Aether.
+     * Held for the lifetime of the Creo process. The service links to its death, so the
+     * privileged process exits together with Creo.
      */
     private val clientToken = Binder()
 

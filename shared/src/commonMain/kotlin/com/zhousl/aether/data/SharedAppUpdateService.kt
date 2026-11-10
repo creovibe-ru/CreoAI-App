@@ -9,8 +9,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-private const val AetherBundleId = "com.baimoqilin.aether"
-const val AetherAppStoreFallbackUrl = "https://apps.apple.com/us/search?term=Aether"
+private const val AetherBundleId = "com.creoai.app"
+const val AetherAppStoreFallbackUrl = "https://apps.apple.com/us/search?term=Creo%20AI"
 
 data class SharedAppUpdateStatus(
     val installedVersion: String,

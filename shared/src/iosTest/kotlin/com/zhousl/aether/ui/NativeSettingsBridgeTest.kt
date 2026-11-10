@@ -171,7 +171,7 @@ class NativeSettingsBridgeTest {
             providerEnvironmentVariables = listOf(PiProviderEnvironmentVariable("REGION", "test")),
             modelId = "model-a",
             manualModelIds = listOf("model-a"),
-            userAgent = "Aether Test",
+            userAgent = "Creo Test",
             customHeaders = listOf(LlmCustomHeader("X-Test", "value")),
             cachedModels = listOf("model-b"),
             enabledModelIds = listOf("model-a", "model-b"),
@@ -191,7 +191,7 @@ class NativeSettingsBridgeTest {
         })
         assertEquals(2, snapshot["modelOptions"]!!.jsonArray.size)
         val serialized = snapshot["providers"]!!.jsonArray.single().jsonObject
-        assertEquals("Aether Test", serialized["userAgent"]!!.jsonPrimitive.content)
+        assertEquals("Creo Test", serialized["userAgent"]!!.jsonPrimitive.content)
         assertEquals("REGION", serialized["providerEnvironmentVariables"]!!.jsonArray.single()
             .jsonObject["name"]!!.jsonPrimitive.content)
         assertEquals("X-Test", serialized["customHeaders"]!!.jsonArray.single()
@@ -206,7 +206,7 @@ class NativeSettingsBridgeTest {
                 data-package-search="pi-example useful tools" data-package-types="extension skill"
                 data-package-downloads="1234">
               <p class="packages-desc">Useful tools</p>
-              <div class="packages-meta"><span>Aether</span><span>1.2K/mo</span></div>
+              <div class="packages-meta"><span>Creo</span><span>1.2K/mo</span></div>
               <div class="packages-badges"><span data-type="extension">extension</span></div>
               <div class="packages-links"><a href="https://www.npmjs.com/package/pi-example">npm</a></div>
               <a data-package-path="/packages/pi-example">Details</a>
@@ -270,7 +270,7 @@ class NativeSettingsBridgeTest {
                             name = "Pi Example",
                             source = source,
                             description = "Example extension",
-                            author = "Aether",
+                            author = "Creo",
                             monthlyDownloads = 42,
                             packageUrl = "https://pi.dev/packages/pi-example",
                             npmUrl = "https://npmjs.com/package/pi-example",
@@ -286,7 +286,7 @@ class NativeSettingsBridgeTest {
                         version = "1.0.0",
                         published = "2026-08-23",
                         downloads = "42",
-                        author = "Aether",
+                        author = "Creo",
                         license = "MIT",
                         size = "12 kB",
                         dependencies = "None",

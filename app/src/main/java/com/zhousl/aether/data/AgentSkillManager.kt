@@ -675,7 +675,7 @@ class AgentSkillManager(
         val request = Request.Builder()
             .url(url)
             .addHeader("Accept", "application/zip, application/octet-stream")
-            .addHeader("User-Agent", "Aether Android Agent")
+            .addHeader("User-Agent", "Creo Android Agent")
             .build()
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) {

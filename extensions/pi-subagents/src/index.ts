@@ -3022,10 +3022,10 @@ Write the file using the write tool. Only write the file, nothing else.`;
     ctx.ui.notify(message, level);
   }
 
-  // ---- Aether Script Mod bridge ---------------------------------------------
-  // Aether loads src/aether.ts in a separate jiti loader. It reads live state
+  // ---- Creo Script Mod bridge ---------------------------------------------
+  // Creo loads src/aether.ts in a separate jiti loader. It reads live state
   // and calls controls through this globalThis handle. The timer only asks
-  // Aether to re-render; rendering itself reads getSnapshot() directly, so
+  // Creo to re-render; rendering itself reads getSnapshot() directly, so
   // per-second refreshes do not persist anything.
   function buildAetherSnapshot(): SubagentsSnapshot {
     const emptyActivity = new Map<string, string>();

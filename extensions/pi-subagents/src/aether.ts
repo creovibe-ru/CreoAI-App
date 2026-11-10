@@ -1,9 +1,9 @@
 /**
- * Aether Script Mod for pi-subagents.
+ * Creo Script Mod for pi-subagents.
  *
  * The Pi extension (src/index.ts) owns subagent execution and keeps running
- * inside Aether. Aether's TUI is absent there, so this mod re-homes the
- * TUI-facing parts on Aether Script API v2:
+ * inside Creo. Creo's TUI is absent there, so this mod re-homes the
+ * TUI-facing parts on Creo Script API v2:
  *
  * - a native settings page that reads/writes the same .pi/subagents.json,
  * - a live "Agents" surface above the composer (widget + FleetView folded
@@ -218,7 +218,7 @@ export function unregisterSubagentsBridge(bridge: SubagentsPiBridge): void {
 	delete (globalThis as Record<PropertyKey, unknown>)[BRIDGE_KEY];
 }
 
-/** Install or refresh the Aether API half of the bridge on Script Mod load. */
+/** Install or refresh the Creo API half of the bridge on Script Mod load. */
 function attachAetherApi(api: AetherExtensionAPI, onBridge?: (bridge: SubagentsPiBridge) => void): void {
 	(globalThis as Record<PropertyKey, unknown>)[API_KEY] = { api, onBridge };
 	const bridge = readBridge();
@@ -424,7 +424,7 @@ function settingsDefinition(): {
 	return {
 		id: SETTINGS_PAGE_ID,
 		title: "Subagents",
-		subtitle: "Subagent concurrency, dispatch, persistence, and Aether UI",
+		subtitle: "Subagent concurrency, dispatch, persistence, and Creo UI",
 		icon: "auto",
 		order: 30,
 		sections: [
@@ -460,10 +460,10 @@ function settingsDefinition(): {
 			},
 			{
 				id: "ui",
-				title: "Aether and Pi UI",
+				title: "Creo and Pi UI",
 				settings: [
-					{ id: "widgetMode", label: "Widget", description: "Live Aether agent card visibility above the composer.", type: "select", options: widgetModeOptions() },
-					{ id: "fleetView", label: "Fleet view", description: "Keep the TUI FleetView enabled for Pi CLI; Aether renders the same roster as tappable cards.", type: "toggle" },
+					{ id: "widgetMode", label: "Widget", description: "Live Creo agent card visibility above the composer.", type: "select", options: widgetModeOptions() },
+					{ id: "fleetView", label: "Fleet view", description: "Keep the TUI FleetView enabled for Pi CLI; Creo renders the same roster as tappable cards.", type: "toggle" },
 					{ id: "agentMentions", label: "Agent mentions", description: "Route @handle messages to that agent. Model starts new agents through an off-screen clone; direct starts them immediately.", type: "select", options: agentMentionOptions() },
 					{ id: "rememberAgents", label: "Remember agents", description: "Persist subagent sessions so @handle can resume them long after completion.", type: "toggle" },
 				],
@@ -795,7 +795,7 @@ async function runAgentAction(api: AetherExtensionAPI, action: string, payload: 
 	}
 }
 
-// ---- Aether activation ------------------------------------------------------
+// ---- Creo activation ------------------------------------------------------
 
 const SUBAGENT_TOOL_TITLES = [
 	["Agent", "Running subagent", "Ran subagent"],

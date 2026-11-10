@@ -11,7 +11,7 @@ private let nativeSettingsPersianTranslations: [String: String] = [
     "Add": "افزودن",
     "Add Provider": "افزودن ارائه‌دهنده",
     "Add Skill": "افزودن مهارت",
-    "Add a provider to choose models for Aether.": "برای انتخاب مدل‌های Aether یک ارائه‌دهنده اضافه کنید.",
+    "Add a provider to choose models for Creo.": "برای انتخاب مدل‌های Creo یک ارائه‌دهنده اضافه کنید.",
     "Add provider": "افزودن ارائه‌دهنده",
     "Advanced settings": "تنظیمات پیشرفته",
     "Agent Skills": "مهارت‌های عامل",
@@ -42,7 +42,7 @@ private let nativeSettingsPersianTranslations: [String: String] = [
     "Choose a provider": "انتخاب ارائه‌دهنده",
     "Choose backup": "انتخاب نسخه پشتیبان",
     "Choose models": "انتخاب مدل‌ها",
-    "Choose the language used throughout Aether.": "زبان مورد استفاده در سراسر Aether را انتخاب کنید.",
+    "Choose the language used throughout Creo.": "زبان مورد استفاده در سراسر Creo را انتخاب کنید.",
     "Command history": "تاریخچه فرمان‌ها",
     "Compatibility": "سازگاری",
     "Compatibility warning": "هشدار سازگاری",
@@ -180,13 +180,13 @@ private let nativeSettingsPersianTranslations: [String: String] = [
     "Subscription": "اشتراک",
     "System": "سیستم",
     "Terminal": "پایانه",
-    "The Alpine environment stays inside Aether's private app storage.": "محیط Alpine در فضای ذخیره‌سازی خصوصی Aether باقی می‌ماند.",
+    "The Alpine environment stays inside Creo's private app storage.": "محیط Alpine در فضای ذخیره‌سازی خصوصی Creo باقی می‌ماند.",
     "The backup may contain conversation content and API credentials. Store it securely.": "نسخه پشتیبان ممکن است شامل محتوای گفتگو و اعتبارنامه‌های API باشد. آن را در مکانی امن نگه دارید.",
     "The export redacts stored credentials and includes runtime diagnostics.": "خروجی، اعتبارنامه‌های ذخیره‌شده را حذف کرده و اطلاعات عیب‌یابی زمان اجرا را در بر می‌گیرد.",
     "Theme": "پوسته",
     "Theme extensions are not supported here.": "افزونه‌های پوسته در اینجا پشتیبانی نمی‌شوند.",
-    "These instructions are included when Aether starts an agent turn.": "این دستورالعمل‌ها هنگام آغاز یک نوبت عامل توسط Aether اضافه می‌شوند.",
-    "These providers rejected the developer message role, so Aether uses system messages for them. Turn a provider off to try developer messages again.": "این ارائه‌دهندگان نقش پیام توسعه‌دهنده را نپذیرفتند، بنابراین Aether برای آن‌ها از پیام‌های سیستم استفاده می‌کند. برای امتحان دوباره پیام‌های توسعه‌دهنده، ارائه‌دهنده را غیرفعال کنید.",
+    "These instructions are included when Creo starts an agent turn.": "این دستورالعمل‌ها هنگام آغاز یک نوبت عامل توسط Creo اضافه می‌شوند.",
+    "These providers rejected the developer message role, so Creo uses system messages for them. Turn a provider off to try developer messages again.": "این ارائه‌دهندگان نقش پیام توسعه‌دهنده را نپذیرفتند، بنابراین Creo برای آن‌ها از پیام‌های سیستم استفاده می‌کند. برای امتحان دوباره پیام‌های توسعه‌دهنده، ارائه‌دهنده را غیرفعال کنید.",
     "This extension may not be compatible with the current platform.": "ممکن است این افزونه با پلتفرم فعلی سازگار نباشد.",
     "This extension requires interactive terminal UI features.": "این افزونه به قابلیت‌های تعاملی رابط پایانه نیاز دارد.",
     "This provider ID is already in use.": "این شناسه ارائه‌دهنده قبلاً استفاده شده است.",
@@ -222,7 +222,7 @@ private let nativeSettingsRussianTranslations: [String: String] = [
     "Add": "Добавить",
     "Add Provider": "Добавить провайдера",
     "Add Skill": "Добавить навык",
-    "Add a provider to choose models for Aether.": "Добавьте провайдера, чтобы выбрать модели для Aether.",
+    "Add a provider to choose models for Creo.": "Добавьте провайдера, чтобы выбрать модели для Creo.",
     "Add provider": "Добавить провайдера",
     "Advanced settings": "Расширенные настройки",
     "Agent Skills": "Навыки агента",
@@ -253,7 +253,7 @@ private let nativeSettingsRussianTranslations: [String: String] = [
     "Choose a provider": "Выберите провайдера",
     "Choose backup": "Выберите резервную копию",
     "Choose models": "Выберите модели",
-    "Choose the language used throughout Aether.": "Выберите язык, используемый в Aether.",
+    "Choose the language used throughout Creo.": "Выберите язык, используемый в Creo.",
     "Command history": "История команд",
     "Compatibility": "Совместимость",
     "Compatibility mode": "Режим совместимости",
@@ -395,13 +395,13 @@ private let nativeSettingsRussianTranslations: [String: String] = [
     "Subscription": "Подписка",
     "System": "Как в системе",
     "Terminal": "Терминал",
-    "The Alpine environment stays inside Aether's private app storage.": "Среда Alpine хранится в частном хранилище приложения Aether.",
+    "The Alpine environment stays inside Creo's private app storage.": "Среда Alpine хранится в частном хранилище приложения Creo.",
     "The backup may contain conversation content and API credentials. Store it securely.": "Резервная копия может содержать содержимое диалогов и учетные данные API. Храните ее в безопасности.",
     "The export redacts stored credentials and includes runtime diagnostics.": "Экспорт скрывает сохраненные учетные данные и включает диагностику среды выполнения.",
     "Theme": "Тема",
     "Theme extensions are not supported here.": "Расширения тем здесь не поддерживаются.",
-    "These instructions are included when Aether starts an agent turn.": "Эти инструкции включаются, когда Aether начинает шаг агента.",
-    "These providers rejected the developer message role, so Aether uses system messages for them. Turn a provider off to try developer messages again.": "Эти провайдеры отклонили роль сообщения разработчика, поэтому Aether использует для них системные сообщения. Отключите провайдера, чтобы снова попробовать сообщения разработчика.",
+    "These instructions are included when Creo starts an agent turn.": "Эти инструкции включаются, когда Creo начинает шаг агента.",
+    "These providers rejected the developer message role, so Creo uses system messages for them. Turn a provider off to try developer messages again.": "Эти провайдеры отклонили роль сообщения разработчика, поэтому Creo использует для них системные сообщения. Отключите провайдера, чтобы снова попробовать сообщения разработчика.",
     "This extension may not be compatible with the current platform.": "Это расширение может быть несовместимо с текущей платформой.",
     "This extension requires interactive terminal UI features.": "Этому расширению требуются функции интерактивного интерфейса терминала.",
     "This provider ID is already in use.": "Этот ID провайдера уже используется.",
@@ -743,7 +743,7 @@ private struct NativeGeneralSettingsView: View {
             } header: {
                 Text(model.text("Language", "语言"))
             } footer: {
-                Text(model.text("Choose the language used throughout Aether.", "选择 Aether 使用的界面语言。"))
+                Text(model.text("Choose the language used throughout Creo.", "选择 Creo 使用的界面语言。"))
             }
             Section {
                 Picker(model.text("Theme", "主题"), selection: themeBinding) {
@@ -796,7 +796,7 @@ private struct NativePersonalizationSettingsView: View {
             } header: {
                 Text(model.text("Custom instructions", "自定义指令"))
             } footer: {
-                Text(model.text("These instructions are included when Aether starts an agent turn.", "这些指令会在 Aether 开始 Agent 任务时加入上下文。"))
+                Text(model.text("These instructions are included when Creo starts an agent turn.", "这些指令会在 Creo 开始 Agent 任务时加入上下文。"))
             }
         }
         .navigationTitle(model.text("Personalization", "个性化"))
@@ -876,7 +876,7 @@ private struct NativeProviderListView: View {
                 ContentUnavailableView(
                     model.text("No providers", "尚无提供商"),
                     systemImage: "cloud",
-                    description: Text(model.text("Add a provider to choose models for Aether.", "添加提供商以便为 Aether 选择模型。"))
+                    description: Text(model.text("Add a provider to choose models for Creo.", "添加提供商以便为 Creo 选择模型。"))
                 )
             }
             ForEach(model.providers, id: \.nativeID) { provider in
@@ -1113,7 +1113,7 @@ private struct NativeProviderEditor: View {
             baseURL: provider?["baseUrl"] as? String ?? model.string(defaultDefinition, "defaultBaseUrl", fallback: "https://api.openai.com/v1"),
             modelIDs: modelIDs.joined(separator: "\n"),
             serviceTier: provider?["serviceTier"] as? String ?? "",
-            userAgent: provider?["userAgent"] as? String ?? "Aether/1.0",
+            userAgent: provider?["userAgent"] as? String ?? "Creo/1.0",
             headers: Self.pairs(provider?["customHeaders"]),
             compatibilityMode: provider?["compatibilityMode"] as? Bool ?? false,
             cachedModels: provider?["cachedModels"] as? [String] ?? [],
@@ -1332,9 +1332,9 @@ private struct NativeProviderEditor: View {
                 }
             } header: { wizardHeader(3) } footer: {
                 Text(model.text(
-                    "Select the models Aether can use with \(model.string(definition, "displayName")).",
-                    "选择 Aether 可通过 \(model.string(definition, "displayName")) 使用的模型。",
-                    "مدل‌هایی را انتخاب کنید که Aether می‌تواند با \(model.string(definition, "displayName")) استفاده کند."
+                    "Select the models Creo can use with \(model.string(definition, "displayName")).",
+                    "选择 Creo 可通过 \(model.string(definition, "displayName")) 使用的模型。",
+                    "مدل‌هایی را انتخاب کنید که Creo می‌تواند با \(model.string(definition, "displayName")) استفاده کند."
                 ))
             }
             Section(model.text("Available Models", "可用模型")) {
@@ -1736,7 +1736,7 @@ private struct NativeProviderEditor: View {
         draft.modelIDs = ""
         draft.authMethod = model.bool(item, "supportsInteractiveApiKey") ? "api_key" : model.bool(item, "supportsOAuth") ? "oauth" : "ambient"
         draft.apiKey = ""; draft.oauthCredentialJson = ""; draft.compatibilityMode = false; draft.cachedModels = []; draft.enabledModels = Set(manualModels)
-        draft.serviceTier = ""; draft.environment = []; draft.headers = []; draft.userAgent = "Aether/1.0"
+        draft.serviceTier = ""; draft.environment = []; draft.headers = []; draft.userAgent = "Creo/1.0"
     }
 
     private func fetchModels() {
@@ -2449,7 +2449,7 @@ private struct NativeAlpineSettingsView: View {
                     Button { model.perform("alpine_set_default") } label: { Label(model.text("Use as Default Runtime", "设为默认运行时"), systemImage: "checkmark.circle") }
                 }
             } footer: {
-                Text(model.text("The Alpine environment stays inside Aether's private app storage.", "Alpine 环境保存在 Aether 的私有应用存储中。"))
+                Text(model.text("The Alpine environment stays inside Creo's private app storage.", "Alpine 环境保存在 Creo 的私有应用存储中。"))
             }
             Section(model.text("Open", "打开")) {
                 Button { showsTerminal = true } label: { Label(model.text("Terminal", "终端"), systemImage: "terminal") }.disabled(!ready)
@@ -2846,8 +2846,8 @@ private struct NativeDeveloperSettingsView: View {
                     Text(model.text("Developer message fallbacks", "Developer 消息回退"))
                 } footer: {
                     Text(model.text(
-                        "These providers rejected the developer message role, so Aether uses system messages for them. Turn a provider off to try developer messages again.",
-                        "这些提供商拒绝了 Developer 消息角色，因此 Aether 会对它们使用 System 消息。关闭提供商标记即可重新尝试 Developer 消息。"
+                        "These providers rejected the developer message role, so Creo uses system messages for them. Turn a provider off to try developer messages again.",
+                        "这些提供商拒绝了 Developer 消息角色，因此 Creo 会对它们使用 System 消息。关闭提供商标记即可重新尝试 Developer 消息。"
                     ))
                 }
             }
@@ -2904,23 +2904,23 @@ private struct NativeAboutSettingsView: View {
                     .frame(width: 96, height: 96)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     .padding(.top, 24)
-                Text("Aether").font(.largeTitle.bold())
+                Text("Creo AI").font(.largeTitle.bold())
                 Text(model.text("Release \(version)", "正式版 \(version)", "نسخه \(version)", "Версия \(version)"))
                     .font(.subheadline).foregroundStyle(.secondary)
                 VStack(spacing: 0) {
-                    aboutRow(model.text("Author", "作者"), "Zhou-Shilin")
+                    aboutRow(model.text("Author", "作者"), "CreoVibe")
                     Divider().padding(.leading, 16)
                     aboutRow(model.text("Version", "版本"), version)
                     Divider().padding(.leading, 16)
-                    Link(destination: URL(string: "https://aether.baimoqilin.com")!) {
+                    Link(destination: URL(string: "https://creovibe.ru")!) {
                         linkRow(model.text("Website", "网站"), "globe")
                     }
                     Divider().padding(.leading, 16)
-                    Link(destination: URL(string: "https://github.com/Zhou-Shilin/Aether")!) {
+                    Link(destination: URL(string: "https://github.com/creovibe-ru/CreoAI-App")!) {
                         linkRow("GitHub", "chevron.left.forwardslash.chevron.right")
                     }
                     Divider().padding(.leading, 16)
-                    Link(destination: URL(string: "https://github.com/Zhou-Shilin/Aether/wiki/Privacy-Policy")!) {
+                    Link(destination: URL(string: "https://creovibe.ru/privacy")!) {
                         linkRow(model.text("Privacy Policy", "隐私政策"), "hand.raised")
                     }
                 }
@@ -2928,7 +2928,7 @@ private struct NativeAboutSettingsView: View {
                     Color(uiColor: .secondarySystemGroupedBackground),
                     in: RoundedRectangle(cornerRadius: 12, style: .continuous)
                 )
-                Text("Copyright © Zhou-Shilin")
+                Text("Copyright © CreoVibe")
                     .font(.footnote).foregroundStyle(.tertiary).padding(.top, 4)
             }
             .padding(.horizontal, 20).padding(.bottom, 28)

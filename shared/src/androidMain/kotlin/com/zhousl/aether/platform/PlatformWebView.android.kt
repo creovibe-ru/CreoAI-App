@@ -28,7 +28,7 @@ actual fun PlatformWebView(
                 settings.domStorageEnabled = true
                 addJavascriptInterface(
                     AetherWebMessageBridge { message -> currentOnMessage(message) },
-                    "Aether",
+                    "Creo",
                 )
             }
         },

@@ -74,7 +74,7 @@ class PiAgentRunner(
         onStreamingStatus: suspend (StreamingStatus?) -> Unit = {},
         pollInjectedUserMessages: suspend () -> List<LlmMessage> = { emptyList() },
     ): Result<AetherAgentTurnResult> {
-        onStreamingStatus(StreamingStatus("Thinking", "Aether is working on this turn."))
+        onStreamingStatus(StreamingStatus("Thinking", "Creo is working on this turn."))
         diagnosticLogger.event(
             category = "pi_agent",
             event = "run_turn_start",
@@ -615,7 +615,7 @@ class PiAgentRunner(
             appExtensionManager?.handleAgentBridgeEvent("aether_host_call", payload)
                 ?: bridge.sendAetherHostResult(
                     callId = payload.optString("call_id"),
-                    error = "The Aether UI host is unavailable.",
+                    error = "The Creo UI host is unavailable.",
                 )
             return
         }

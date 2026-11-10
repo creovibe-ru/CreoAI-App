@@ -266,9 +266,9 @@ const val MaxOldCommandHistoryRetentionHours = 168
 private const val MinLlmInactivityReconnectTimeoutSeconds = 30
 private const val MaxLlmInactivityReconnectTimeoutSeconds = 3600
 const val OnboardingStarterPrompt = "Hi"
-const val AetherWebsiteUrl = "https://aether.baimoqilin.com"
-const val AetherGitHubUrl = "https://github.com/Zhou-Shilin/Aether"
-const val AetherPrivacyPolicyUrl = "https://github.com/Zhou-Shilin/Aether/wiki/Privacy-Policy"
+const val AetherWebsiteUrl = "https://creovibe.ru"
+const val AetherGitHubUrl = "https://github.com/creovibe-ru/CreoAI-App"
+const val AetherPrivacyPolicyUrl = "https://creovibe.ru/privacy"
 
 private val AppSettingsJson = Json {
     ignoreUnknownKeys = true

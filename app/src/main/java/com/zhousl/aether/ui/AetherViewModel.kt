@@ -3388,7 +3388,7 @@ class AetherViewModel(
         modKernel.services.register(
             id = "state",
             owner = "aether-core",
-            description = "Read the public Aether state tree and apply supported state transactions.",
+            description = "Read the public Creo state tree and apply supported state transactions.",
             priority = -10_000,
             methods = listOf(
                 AetherModServiceMethod("get", "Read a value from the public state tree."),
@@ -3432,7 +3432,7 @@ class AetherViewModel(
         ).getOrNull() ?: return AetherModOperationDecision(
             payload = nativeDecision.payload,
             cancelled = true,
-            reason = "Aether script operation interceptor failed.",
+            reason = "Creo script operation interceptor failed.",
         )
         return AetherModOperationDecision(
             payload = scriptDecision.payload,
@@ -3594,7 +3594,7 @@ class AetherViewModel(
                 }
             }
 
-            else -> error("Unsupported public Aether state path: ${operation.optString("path")}")
+            else -> error("Unsupported public Creo state path: ${operation.optString("path")}")
         }
     }
 
@@ -3696,7 +3696,7 @@ class AetherViewModel(
                 when (screen) {
                     "settings" -> openSettings()
                     "chat" -> closeSettings()
-                    else -> error("Unknown Aether screen: $screen")
+                    else -> error("Unknown Creo screen: $screen")
                 }
             }
             JSONObject().put("opened", screen)
@@ -3816,7 +3816,7 @@ class AetherViewModel(
                 .put("output", output)
         }
 
-        else -> error("Unsupported Aether extension host method: $method")
+        else -> error("Unsupported Creo extension host method: $method")
     }
 
     private fun currentSelectedSkillIds(
@@ -5643,7 +5643,7 @@ class AetherViewModel(
         val logcat = readLogcatDump()
         val diagnosticEvents = diagnosticLogger.readEventsText()
         val lastCrash = diagnosticLogger.readLastCrashText()
-        appendLine("Aether diagnostic log")
+        appendLine("Creo diagnostic log")
         appendLine("generatedAtMillis=${System.currentTimeMillis()}")
         appendLine("versionName=${BuildConfig.VERSION_NAME}")
         appendLine("versionCode=${BuildConfig.VERSION_CODE}")

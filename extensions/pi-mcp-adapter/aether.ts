@@ -1091,7 +1091,7 @@ function clearNewServerForm(api: AetherExtensionAPI): void {
 }
 
 // ---------------------------------------------------------------------------
-// Aether Script Mod entrypoint
+// Creo Script Mod entrypoint
 // ---------------------------------------------------------------------------
 
 const MCP_TOOL_TITLES = [

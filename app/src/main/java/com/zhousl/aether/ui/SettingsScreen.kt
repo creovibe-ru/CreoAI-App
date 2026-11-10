@@ -6192,7 +6192,7 @@ private fun AboutPage(
             )
             Spacer(Modifier.height(14.dp))
             Text(
-                text = "Aether",
+                text = "Creo AI",
                 style = MaterialTheme.typography.titleLarge,
                 color = AetherOnSurface,
             )
@@ -6207,7 +6207,7 @@ private fun AboutPage(
         Spacer(Modifier.height(24.dp))
 
         SettingsCardGroup {
-            AboutInfoRow(label = stringResource(R.string.settings_author), value = "Zhou-Shilin")
+            AboutInfoRow(label = stringResource(R.string.settings_author), value = "CreoVibe")
             CardDivider()
             AboutInfoRow(label = stringResource(R.string.settings_version), value = releaseLabel)
             CardDivider()
