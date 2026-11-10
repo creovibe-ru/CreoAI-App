@@ -38,6 +38,10 @@ val nightlyKeystoreFile = localOrEnv("nightly.storeFile", "NIGHTLY_KEYSTORE_FILE
 val nightlyKeystorePassword = localOrEnv("nightly.storePassword", "NIGHTLY_KEYSTORE_PASSWORD")
 val nightlyKeyAlias = localOrEnv("nightly.keyAlias", "NIGHTLY_KEY_ALIAS")
 val nightlyKeyPassword = localOrEnv("nightly.keyPassword", "NIGHTLY_KEY_PASSWORD")
+val releaseKeystoreFile = localOrEnv("creo.storeFile", "CREO_KEYSTORE_FILE")
+val releaseKeystorePassword = localOrEnv("creo.storePassword", "CREO_KEYSTORE_PASSWORD")
+val releaseKeyAlias = localOrEnv("creo.keyAlias", "CREO_KEY_ALIAS")
+val releaseKeyPassword = localOrEnv("creo.keyPassword", "CREO_KEY_PASSWORD")
 val appVersionName = providers.gradleProperty("aether.versionName")
     .orNull
     ?.trim()
@@ -135,6 +139,19 @@ android {
     }
 
     signingConfigs {
+        create("creo") {
+            if (
+                releaseKeystoreFile.isNotBlank() &&
+                releaseKeystorePassword.isNotBlank() &&
+                releaseKeyAlias.isNotBlank() &&
+                releaseKeyPassword.isNotBlank()
+            ) {
+                storeFile = file(releaseKeystoreFile)
+                storePassword = releaseKeystorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
         create("nightly") {
             if (
                 nightlyKeystoreFile.isNotBlank() &&
@@ -170,6 +187,11 @@ android {
         }
 
         release {
+            signingConfig = if (releaseKeystoreFile.isNotBlank()) {
+                signingConfigs.getByName("creo")
+            } else {
+                null
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"

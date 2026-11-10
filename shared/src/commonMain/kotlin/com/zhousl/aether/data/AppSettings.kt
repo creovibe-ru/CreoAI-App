@@ -268,7 +268,7 @@ private const val MaxLlmInactivityReconnectTimeoutSeconds = 3600
 const val OnboardingStarterPrompt = "Hi"
 const val AetherWebsiteUrl = "https://creovibe.ru"
 const val AetherGitHubUrl = "https://github.com/creovibe-ru/CreoAI-App"
-const val AetherPrivacyPolicyUrl = "https://creovibe.ru/privacy"
+const val AetherPrivacyPolicyUrl = "https://app.creovibe.ru/privacy"
 
 private val AppSettingsJson = Json {
     ignoreUnknownKeys = true

@@ -2920,7 +2920,7 @@ private struct NativeAboutSettingsView: View {
                         linkRow("GitHub", "chevron.left.forwardslash.chevron.right")
                     }
                     Divider().padding(.leading, 16)
-                    Link(destination: URL(string: "https://creovibe.ru/privacy")!) {
+                    Link(destination: URL(string: "https://app.creovibe.ru/privacy")!) {
                         linkRow(model.text("Privacy Policy", "隐私政策"), "hand.raised")
                     }
                 }

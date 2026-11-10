@@ -40,7 +40,7 @@ CreoVibe: зелёная палитра `#22C55E`, новое имя и лого
 | Версия | 1.0.0 (versionCode 100) |
 | Сайт | https://creovibe.ru |
 | API приложения | https://app.creovibe.ru/v1 (провайдер CreoVibe, OpenAI-совместимый) |
-| Privacy | https://creovibe.ru/privacy |
+| Privacy | https://app.creovibe.ru/privacy |
 
 Kotlin-namespace остаётся `com.zhousl.aether` (техническое имя пакетов кода,
 не видно пользователю; сохранено для упрощения синхронизации с апстримом).
