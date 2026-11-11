@@ -10,6 +10,10 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 
+private const val LocalUpdateManifestUrl =
+    "https://app.creovibe.ru/versions.json"
+private const val LocalUpdateBaseUrl =
+    "https://app.creovibe.ru/"
 private const val GithubLatestReleaseUrl =
     "https://api.github.com/repos/creovibe-ru/CreoAI-App/releases/latest"
 private const val GithubLatestNightlyRunUrl =
@@ -26,13 +30,63 @@ data class AppUpdateRelease(
     val apkFileName: String,
     val apkDownloadUrl: String,
     val isZipArchive: Boolean = false,
+    val sha256: String? = null,
 )
 
 class AppUpdateManager(
     private val context: Context,
     private val client: OkHttpClient = OkHttpClient(),
 ) {
-    suspend fun fetchLatestRelease(): AppUpdateRelease {
+    /**
+     * Обновления раздаются с наших ресурсов (app.creovibe.ru); GitHub — резервный канал.
+     */
+    suspend fun fetchLatestRelease(): AppUpdateRelease =
+        runCatching { fetchLatestLocalRelease() }.getOrElse { fetchLatestGithubRelease() }
+
+    private suspend fun fetchLatestLocalRelease(): AppUpdateRelease {
+        val request = Request.Builder()
+            .url(LocalUpdateManifestUrl)
+            .header("Accept", "application/json")
+            .header("Cache-Control", "no-cache")
+            .header("User-Agent", "CreoAI-Android")
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) {
+                error("Update server returned HTTP ${response.code}")
+            }
+            val manifest = JSONObject(response.body?.string().orEmpty())
+            val versions = manifest.optJSONArray("versions")
+                ?: error("Update manifest did not include versions.")
+            val latest = manifest.optString("latest").trim()
+            val entries = buildList {
+                for (index in 0 until versions.length()) {
+                    versions.optJSONObject(index)?.let(::add)
+                }
+            }
+            val entry = entries.firstOrNull { it.optString("versionName").trim() == latest }
+                ?: entries.firstOrNull()
+                ?: error("Update manifest did not include any release.")
+            val versionName = entry.optString("versionName").trim()
+            val file = entry.optString("file").trim()
+            val apkUrl = entry.optString("apkUrl").trim().ifBlank {
+                if (file.isBlank()) "" else LocalUpdateBaseUrl + file.trimStart('/')
+            }
+            if (versionName.isBlank() || apkUrl.isBlank()) {
+                error("Update manifest entry is incomplete.")
+            }
+            return AppUpdateRelease(
+                versionName = versionName,
+                tagName = versionName,
+                releaseUrl = LocalUpdateBaseUrl,
+                apkFileName = apkUrl.substringAfterLast('/').ifBlank { "CreoAI-$versionName.apk" },
+                apkDownloadUrl = apkUrl,
+                sha256 = entry.optString("sha256").trim().ifBlank { null },
+            )
+        }
+    }
+
+    private suspend fun fetchLatestGithubRelease(): AppUpdateRelease {
         val request = Request.Builder()
             .url(GithubLatestReleaseUrl)
             .header("Accept", "application/vnd.github+json")
@@ -179,6 +233,15 @@ class AppUpdateManager(
             }
         }
 
+        val expectedSha = release.sha256?.lowercase(Locale.US)?.trim()
+        if (!expectedSha.isNullOrBlank()) {
+            val actualSha = outputFile.sha256Hex()
+            if (actualSha != expectedSha) {
+                outputFile.delete()
+                error("Downloaded APK failed integrity check.")
+            }
+        }
+
         return FileProvider.getUriForFile(
             context,
             "${context.packageName}.fileprovider",
@@ -231,6 +294,19 @@ private fun String.nightlyHash(): String =
 private fun String.numericVersionParts(): List<Int> =
     split(Regex("[^0-9]+"))
         .mapNotNull { it.toIntOrNull() }
+
+private fun File.sha256Hex(): String {
+    val digest = java.security.MessageDigest.getInstance("SHA-256")
+    inputStream().use { input ->
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        while (true) {
+            val read = input.read(buffer)
+            if (read < 0) break
+            digest.update(buffer, 0, read)
+        }
+    }
+    return digest.digest().joinToString("") { byte -> "%02x".format(byte) }
+}
 
 private fun String.sanitizeFileName(): String =
     replace(Regex("[^A-Za-z0-9._-]+"), "_")
