@@ -1,0 +1,112 @@
+name: Build iOS IPA (unsigned)
+
+# Собирает unsigned .ipa для установки без App Store:
+# пользователь подписывает его своим Apple ID (AltStore / SideStore / Sideloadly / ESign).
+# Запуск: вручную (workflow_dispatch) или пушем тега v*.
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  ipa:
+    runs-on: macos-26
+    timeout-minutes: 90
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.19.0'
+          cache: npm
+          cache-dependency-path: pi-bridge/package-lock.json
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: enhanced
+          cache-read-only: false
+
+      - name: Install iOS build tools
+        run: brew install llvm lld meson ninja xcodegen
+
+      - name: Build Pi Bridge
+        working-directory: pi-bridge
+        run: |
+          npm ci --ignore-scripts --legacy-peer-deps
+          npm run build
+
+      - name: Generate iOS project
+        run: scripts/bootstrap-ios.sh
+
+      - name: Build unsigned device app
+        run: |
+          xcodebuild \
+            -project iosApp/Aether.xcodeproj \
+            -scheme Aether \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build/ios-derived \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Package IPA
+        id: package
+        run: |
+          set -euo pipefail
+          VERSION="$(sed -n 's/^MARKETING_VERSION = //p' iosApp/Configuration/Base.xcconfig | tr -d '[:space:]')"
+          BUILD_NUMBER="$(sed -n 's/^CURRENT_PROJECT_VERSION = //p' iosApp/Configuration/Base.xcconfig | tr -d '[:space:]')"
+          APP_PATH="$(find build/ios-derived/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' | head -1)"
+          if [ -z "$APP_PATH" ]; then
+            echo "Не найден собранный .app" >&2
+            exit 1
+          fi
+          mkdir -p Payload
+          cp -R "$APP_PATH" Payload/CreoAI.app
+          IPA="CreoAI-${VERSION}.ipa"
+          zip -qry "$IPA" Payload
+          rm -rf Payload
+          echo "ipa=$IPA" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          ls -la "$IPA"
+          echo "SHA256: $(shasum -a 256 "$IPA" | cut -d' ' -f1)"
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: CreoAI-ipa
+          path: ${{ steps.package.outputs.ipa }}
+          retention-days: 30
+          archive: false
+
+      - name: Attach IPA to release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          IPA="${{ steps.package.outputs.ipa }}"
+          gh release view "$TAG" >/dev/null 2>&1 \
+            && gh release upload "$TAG" "$IPA" --clobber \
+            || gh release create "$TAG" "$IPA" --title "Creo AI ${{ steps.package.outputs.version }}" --notes "Creo AI $TAG — unsigned IPA. Подпишите своим Apple ID (AltStore / SideStore / Sideloadly / ESign)."
